@@ -1,0 +1,2011 @@
+package pies;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class Handler extends DefaultHandler {
+
+	private static String url = "jdbc:oracle:thin:@192.168.2.68:1521:orcl";
+	private static String userName = "test";
+	private static String password = "test";
+	public static Connection connect2 = null;
+	public static Connection conn = null;
+	public static Handler handler = null;
+	public static long s = 0;
+	public static long h = 0;
+	public static long t = 0;
+	public static long p = 0;
+	public static long count = 0;
+	public static long count1 = 0;
+	public static long count2 = 0;
+	public static long count3 = 0;
+	public static long count4 = 0;
+	public static long count5 = 0;
+	public static long count6 = 0;
+    public static long count7 = 0;
+	public static long count8 = 0;
+	public static long duplicatedata = 0;
+//	public static Statement getDescriptiondata=null;
+	public ResultSet status=null;
+	public ResultSet status1=null;
+	//Statement getProattri= null;
+	public static String temp="";
+	public static String temp1="";
+	private List<Header> headerList = null;
+	private Header header = null;
+
+	private List<Descriptions> descriptionsList = null;
+	private Descriptions descriptions = null;
+
+	private List<DigitalAssets> digitalassetList = null;
+	private DigitalAssets digitalasset = null;
+
+	private List<ExtendedInformation> extendinfoList = null;
+	private ExtendedInformation extendedinformation = null;
+
+	private List<Item> itemList = null;
+	private Item item = null;
+
+	private List<Prices> pricesList = null;
+	private Prices prices = null;
+
+	private List<PriceSheets> pricesheetsList = null;
+	private PriceSheets pricessheets = null;
+
+	private List<ProductAttributes> productattributesList = null;
+	private ProductAttributes productattributes = null;
+
+	private List<Trailer> trailerList = null;
+	private Trailer trailer = null;
+
+	public List<Header> getHeaderList() {
+		return headerList;
+
+	}
+
+	public List<Descriptions> getDescriptionsList() {
+
+		return descriptionsList;
+	}
+
+	public List<DigitalAssets> getDigitalAssetsList() {
+
+		return digitalassetList;
+	}
+
+	public List<ExtendedInformation> getExtendedInformation() {
+
+		return extendinfoList;
+	}
+
+	public List<Item> getItemList() {
+
+		return itemList;
+	}
+
+	public List<Prices> getPricesList() {
+
+		return pricesList;
+	}
+
+	public List<PriceSheets> getPriceSheetsList() {
+
+		return pricesheetsList;
+	}
+
+	public List<ProductAttributes> getProductAttributesList() {
+
+		return productattributesList;
+	}
+
+	public List<Trailer> gettTrailerList() {
+
+		return trailerList;
+	}
+
+	Handler() {
+
+		Connection connect2 = connectionDriver();
+		conn = connect2;
+	}
+
+	public static Connection connectionDriver() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			connect2 = DriverManager.getConnection(url, userName, password);
+			System.out.println("Connected to Sql Server");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return connect2;
+	}
+
+	public static void passinHeader(List<Header> headerList) {
+		PreparedStatement statement1 = null;
+		try {
+			String insertHeader = "INSERT INTO PIES_HEADER_INFO VALUES (PIES_HEADER_INFO_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+
+			statement1 = conn.prepareStatement(insertHeader);
+			for (Header header : headerList) {
+
+				try {
+					// System.out.println("headerData");
+					statement1.setString(1, (header.getPIESVersion()));
+					statement1.setString(2, (header.getSubmissionType()));
+					statement1.setString(3, (header.getBlanketEffectiveDate()));
+					statement1.setString(4, (header.getParentAAIAID()));
+					statement1.setString(5, (header.getBrandOwnerAAIAID()));
+					statement1.setString(6, (header.getCurrencyCode()));
+					statement1.setString(7, (header.getLanguageCode()));
+					statement1.setString(8, (header.getTechnicalContact()));
+					statement1.setString(9, (header.getContactEmail()));
+					statement1.execute();
+					System.out.println("HEADER DATA INSERTED   "+ ++count);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// System.out.println("Header Data Ended");
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in Header INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	public static void passinTRAILER(List<Trailer> trailerList) {
+
+		PreparedStatement statement2 = null;
+
+		try {
+			String insertHeader = "INSERT INTO PIES_TRAILER_INFO VALUES (PIES_TRAILER_INFO_SEQ.NEXTVAL,?,?)";
+
+			statement2 = conn.prepareStatement(insertHeader);
+			for (Trailer trailer : trailerList) {
+
+				statement2.setString(1, (trailer.getItemCount()));
+				statement2.setString(2, (trailer.getTransactionDate()));
+
+				System.out.println("TOTAL RECORD    " + trailer.getItemCount());
+				System.out.println("TRAILER DATA INSERTED    "+  ++count1);
+				statement2.execute();
+			}
+
+			System.out.println("end prgram");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement2.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in Trailer INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public  void passinDESCRIPTION(List<Descriptions> descriptionsList)
+	
+	{
+		/*
+		 * PreparedStatement statement3 = null; Statement headstmt3 = null;
+		 * ResultSet rs = null; //int s = 0; int itemid = 0; int count =0;; try
+		 * {
+		 * 
+		 * headstmt3 = conn.createStatement();
+		 * 
+		 * rs = headstmt3
+		 * .executeQuery("select MAX(ITEM_ID) from PIES_ITEM_INFO"); if (rs !=
+		 * null) { while (rs.next()) { itemid = rs.getInt(1); } }
+		 * System.out.println("ITEM======================" + itemid); s =
+		 * itemid;
+		 * 
+		 * 
+		 * System.out.println("ITEM_ID=" + s);
+		 * 
+		 * } catch (Exception e2) { e2.printStackTrace(); } finally { try {
+		 * headstmt3.close();
+		 * 
+		 * rs.close(); } catch (Exception e1) {
+		 * 
+		 * } }
+		 */
+		
+		Statement getDescriptiondata=null;
+		PreparedStatement statement3 = null;
+		//Connection rsultconnect=connectionDriver();
+			
+
+		try {
+			//Connection conn=connectionDriver();
+			getDescriptiondata=conn.createStatement();	
+			//getDescriptiondata=conn.createStatement();	
+			
+			int count =0;
+			int s=0;
+			 int batchSize=100;
+			String insertHeader = "INSERT INTO PIES_DESCRIPTION_INFO1 VALUES (PIES_DESCRIPTION_INFO_SEQ.NEXTVAL,?,?,?,?,?)";
+
+			statement3 = conn.prepareStatement(insertHeader);
+			//int count2 = 0;
+
+			for (Descriptions description : descriptionsList) {
+				try {
+					//ResultSet status =null;
+					 String sqlQuery = "select  Description,MaintenanceType,DescriptionCode,LanguageCode from PIES_DESCRIPTION_INFO1 WHERE ";
+					 
+					if(!"".equals(description.getDescription()))
+						 sqlQuery +="Description='"+description.getDescription()+ "'";
+					
+					if(!"".equals(description.getDes_MaintenanceType()))
+						 sqlQuery +="and MaintenanceType='"+description.getDes_MaintenanceType()+ "'";
+					
+					if(!"".equals(description.getDescriptionCode()))
+						 sqlQuery +="and DescriptionCode='"+description.getDescriptionCode()+ "'";
+					
+					if(!"".equals(description.getDes_LanguageCode()))
+						 sqlQuery +="and LanguageCode='"+description.getDes_LanguageCode()+"'";
+					
+					
+					
+					
+					status=getDescriptiondata.executeQuery(sqlQuery);					
+					if(status1==status){
+						System.out.println("DataInserted11111111111111111111111111");
+					}
+					else if(!status.next())
+					{
+					statement3.setString(1, (description.getDescription()));
+					statement3.setString(2, (description.getDes_MaintenanceType()));
+					statement3.setString(3, (description.getDescriptionCode()));
+					statement3.setString(4, (description.getDes_LanguageCode()));
+
+					statement3.setLong(5, (s));
+					System.out.println("DESCRIPTION DATA INSERTED   "+ ++count2);
+					statement3.addBatch();
+					if(++count%batchSize==0)
+					{
+					  statement3.execute();
+					  System.out.println("record inserted using batch");
+					  System.out.println("DESCRIPTION DATA INSERTED   "+ ++count2);
+					 // status=null;
+					}
+					
+		         	}  else{
+				
+					System.out.println("Number of duplicate record count-------"+ ++duplicatedata);	
+					//status=null;
+					}
+				//	System.out.println("DESCRIPTION DATA INSERTED   "+ ++count2);
+					}
+				 catch (Exception e1) {
+					e1.printStackTrace();
+					System.out.println("Error occured" + count++);
+
+				}
+
+			}
+
+			// ----------------------------------------------------------------------------------------------
+
+			// ----------------------------------------------------------------------------------------------
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				getDescriptiondata.close();
+				statement3.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in Description INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	public static void passinDIGITALASSETS(List<DigitalAssets> digitalassetList) {
+		PreparedStatement statement1 = null;
+		try {
+			String insertHeader = "INSERT INTO   PIES_DIGITALASSETS_INFO VALUES (PIES_DIGITALASSETS_INFO_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+
+			statement1 = conn.prepareStatement(insertHeader);
+			for (DigitalAssets digitalAsset : digitalassetList) {
+				try {
+					statement1
+							.setString(1, (digitalAsset.getMaintenanceType()));
+					statement1.setString(2, (digitalAsset.getFileName()));
+					statement1.setString(3, (digitalAsset.getAssetType()));
+					statement1.setString(4, (digitalAsset.getFileType()));
+					statement1.setString(5, (digitalAsset.getRepresentation()));
+					statement1.setString(6, (digitalAsset.getBackground()));
+					statement1
+							.setString(7, (digitalAsset.getOrientationView()));
+					statement1.setString(8, (digitalAsset
+							.getAssetDimensions_UOM()));
+					statement1.setString(9, (digitalAsset.getAssetHeight()));
+					statement1.setString(10, (digitalAsset.getAssetWidth()));
+
+					statement1.execute();
+					System.out.println("DESCRIPTION DATA INSETED   "+   ++count3);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in DigitalAssets INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	public static void passinEXINFORMATION(
+			List<ExtendedInformation> extendinfoList) {
+		PreparedStatement statement1 = null;
+		try {
+			String insertHeader = "INSERT INTO PIES_EXTEND_INFO VALUES(PIES_EXTINFORM_INFO_SEQ.NEXTVAL,?,?,?,?)";
+
+			statement1 = conn.prepareStatement(insertHeader);
+			for (ExtendedInformation extinfo : extendinfoList) {
+				try {
+
+					statement1.setString(1, (extinfo.getExMaintenanceType()));
+					statement1.setString(2, (extinfo.getEXPICode()));
+					statement1.setString(3, (extinfo.getExLanguageCode()));
+					statement1.setString(4, (extinfo.getExtendInfo()));
+
+					statement1.execute();
+					System.out.println("EXTENED INFORMATION DATA INSERTED  " +  ++count4);				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in ExtendedInformation INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	public static void passinPRICES(List<Prices> pricesList) {
+		PreparedStatement statement1 = null;
+		try {
+			String insertHeader = "INSERT INTO PIES_PRICES_INFO VALUES (PIES_PRICES_INFO_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+
+			statement1 = conn.prepareStatement(insertHeader);
+			for (Prices price : pricesList) {
+				try {
+
+					statement1.setString(1,
+							(price.getPricing_MaintenanceType()));
+					statement1.setString(2, (price.getPriceType()));
+					statement1.setString(3, (price.getPriceSheetNumber()));
+					statement1.setString(4, (price.getPrice_CurrencyCode()));
+					statement1.setString(5, (price.getEffectiveDate()));
+					statement1.setString(6, (price.getPrice_UOM()));
+					statement1.setString(7, (price.getPricing()));
+					statement1.setString(8, (price.getPrice()));
+					statement1.setLong(9, s);
+
+					statement1.execute();
+					System.out.println("PRICE DATA INSERTED  "+  ++count5);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out.println("Exception in Price INSERT RECORD IN BATCH "
+						+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	public static void passinPRICESHEETS(List<PriceSheets> pricesheetsList) {
+		PreparedStatement statement1 = null;
+		try {
+			String insertHeader = "INSERT INTO PIES_PRICESHEET_INFO VALUES (PIES_PRICESHEET_INFO_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
+
+			statement1 = conn.prepareStatement(insertHeader);
+			for (PriceSheets pricesheet : pricesheetsList) {
+				try {
+					statement1.setString(1,
+							(pricesheet.getPs_MaintenanceType()));
+					statement1.setString(2, (pricesheet
+							.getPs_PriceSheetNumber()));
+					statement1.setString(3, (pricesheet.getPriceSheetName()));
+					statement1.setString(4, (pricesheet
+							.getSupersededPriceSheetNumber()));
+					statement1.setString(5, (pricesheet.getPs_CurrencyCode()));
+					statement1.setString(6, (pricesheet.getPs_EffectiveDate()));
+					statement1.setString(7, (pricesheet.getPriceSheet()));
+
+					statement1.execute();
+					System.out.println("PRICESHEET DATA INSERTED   "+   ++count6);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in PriceSheet INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	public static void passinPRODUCTATTRIBUTES(
+			List<ProductAttributes> productattributesList) {
+		
+		//Statement getProattri= null;
+		ResultSet status =null;
+		//Connection rsultconnect=connectionDriver();
+		PreparedStatement statement1 = null;
+		try {
+			String insertHeader = "INSERT INTO PIES_PRODUCTATTRIBUTES_INFO VALUES (PIES_PROATTRIBUTE_INFO_SEQ.NEXTVAL,?,?,?,?,?)";
+		//	getProattri	=rsultconnect.createStatement();	
+			statement1 = conn.prepareStatement(insertHeader);
+			for (ProductAttributes pattribute : productattributesList) {
+				try {
+					/*String sqlQuery="SELECT MaintenanceType,AttributeID,PADBAttribute,ProductAttribute_INFO from PIES_PRODUCTATTRIBUTES_INFO WHERE ";
+					
+					if(!"".equals(pattribute.getProductAttribute_MaintenanceType()))
+						 sqlQuery +="MaintenanceType='"+pattribute.getProductAttribute_MaintenanceType()+"'";
+					
+					if(!"".equals(pattribute.getAttributeID()))
+					 sqlQuery +="and AttributeID='"+pattribute.getAttributeID();
+					
+					if(!"".equals(pattribute.getPADBAttribute()))
+					 sqlQuery +="and PADBAttribute='"+pattribute.getPADBAttribute()+"'";
+					 
+					if(!"".equals(pattribute.getProductAttribute_INFO()))
+					 sqlQuery +="and ProductAttribute_INFO='"+pattribute.getProductAttribute_INFO();
+
+
+					status=getProattri.executeQuery(sqlQuery);
+					
+					
+					
+					if(!status.next())*/{
+					
+					statement1.setString(1, (pattribute
+							.getProductAttribute_MaintenanceType()));
+					statement1.setString(2, (pattribute.getAttributeID()));
+					statement1.setString(3, (pattribute.getPADBAttribute()));
+					statement1.setString(4, (pattribute
+							.getProductAttribute_INFO()));
+					statement1.setLong(5, s);
+
+					statement1.execute();
+                     System.out.println("PRODUCTE ATTRIBUTE DATA INSERTED   "+  ++count7);
+				}
+				}catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out
+						.println("Exception in ProductAttributes INSERT RECORD IN BATCH "
+								+ e);
+				e.printStackTrace();
+
+			}
+		}
+
+	}
+
+	
+
+	public static void passinItem(List<Item> itemList) {
+		PreparedStatement statement1 = null;
+		Statement headstmt3 = null;
+		ResultSet rs = null;
+
+		int Headerid = 0;
+		int Trailerid = 0;
+		int Pricesheetid = 0;
+		try {
+
+			headstmt3 = conn.createStatement();
+
+			rs = headstmt3
+					.executeQuery("select MAX(HEADER_ID) from PIES_HEADER_INFO");
+			if (rs != null) {
+				while (rs.next()) {
+					Headerid = rs.getInt(1);
+				}
+			}
+			//System.out.println("HEADER======================" + Headerid);
+			h = Headerid;
+
+			System.out.println("HEADER_ID=" + s);
+
+		} catch (Exception e2) {
+			System.out.println("Headerid exception");
+			e2.printStackTrace();
+		} finally {
+			try {
+				headstmt3.close();
+
+				rs.close();
+			} catch (Exception e1) {
+				System.out.println("Headerid exception1");
+			}
+		}
+
+		try {
+
+			headstmt3 = conn.createStatement();
+
+			rs = headstmt3
+					.executeQuery("select MAX(TRAILER_ID) from PIES_TRAILER_INFO");
+			if (rs != null) {
+				while (rs.next()) {
+					Trailerid = rs.getInt(1);
+				}
+			}
+			//System.out.println("TRAILER======================" + Trailerid);
+			h = Trailerid;
+
+			System.out.println("TRAILER_ID=" + h);
+
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			System.out.println("Trailerid exception");
+		} finally {
+			try {
+				headstmt3.close();
+
+				rs.close();
+			} catch (Exception e1) {
+				System.out.println("Trailerid exception1");
+				e1.printStackTrace();
+			}
+		}
+
+		try {
+
+			headstmt3 = conn.createStatement();
+
+			rs = headstmt3
+					.executeQuery("select MAX(PRICESHEET_ID) from PIES_PRICESHEET_INFO");
+			if (rs != null) {
+				while (rs.next()) {
+					Pricesheetid = rs.getInt(1);
+				}
+			}
+			System.out.println("PRICESHEET======================"
+					+ Pricesheetid);
+			p = Pricesheetid;
+
+			System.out.println("PRICESHEET_ID=" + p);
+
+		} catch (Exception e2) {
+			System.out.println("pricesheets  exception");
+			e2.printStackTrace();
+		} finally {
+			try {
+				headstmt3.close();
+
+				rs.close();
+			} catch (Exception e1) {
+				System.out.println("pricesheets exception1");
+				e1.printStackTrace();
+			}
+		}
+
+		try {
+			String insertHeader = "INSERT INTO PIES_ITEM_INFO VALUES (PIES_ITEM_INFO1_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+			statement1 = conn.prepareStatement(insertHeader);
+			//int count2 = 0;
+			 for (Item item : itemList) {
+				try {
+					statement1.setString(1, (item.getItem_MaintenanceType()));
+					statement1.setString(2, (item.getHazardousMaterialCode()));
+					statement1.setString(3, (item.getItemLevelGTIN()));
+					statement1.setString(4, (item.getGTINQualifier()));
+					statement1.setString(5, (item.getPartNumber()));
+					statement1.setString(6, (item.getBrandAAIAID()));
+					statement1.setString(7, (item.getBrandLabel()));
+					statement1.setString(8, (item.getACESApplications()));
+					statement1.setString(9, (item.getItemQuantitySize_UOM()));
+					statement1.setString(10, (item.getItemQuantitySize()));
+					statement1.setString(11, (item.getContainerType()));
+					statement1.setString(12, (item.getQualifier()));
+					statement1.setString(13, (item.getQualifier_UOM()));
+					statement1.setString(14, (item.getQualifier_INFO()));
+					statement1.setString(15, (item.getItemEffectiveDate()));
+					statement1.setString(16, (item.getAvailableDate()));
+					statement1.setString(17, (item
+							.getMinimumOrderQuantity_UOM()));
+					statement1.setString(18, (item.getMinimumOrderQuantity()));
+					statement1.setString(19, (item
+							.getManufacturerProductCodes()));
+					statement1.setString(20, (item.getProductCodes_SubGroup()));
+					statement1.setString(21,
+							(item.getAAIAProductCategoryCode()));
+					statement1.setString(22, (item.getPartTerminologyID()));
+					statement1.setString(23, (item.getVMRSCode()));
+					statement1.setString(24,
+							(item.getPackage_MaintenanceType()));
+					statement1.setString(25, (item.getPackageLevelGTIN()));
+					statement1.setString(26, (item
+							.getPackageBarCodeCharacters()));
+					statement1.setString(27, (item.getPackage_UOM()));
+					statement1.setString(28, (item.getQuantityofEaches()));
+					statement1.setString(29, (item.getInnerQuantity_UOM()));
+					statement1.setString(30, (item.getInnerQuantity()));
+					statement1.setString(31, (item.getOrderable()));
+					statement1.setString(32, (item.getDimensions_UOM()));
+					statement1.setString(33, (item.getDimensions_Height()));
+					statement1.setString(34, (item.getDimensions_Length()));
+					statement1.setString(35, (item.getDimensions_Length()));
+					statement1.setString(36, (item.getWeights_UOM()));
+					statement1.setString(37, (item.getWeights_Weight()));
+					statement1.setLong(38, t);
+					statement1.setLong(39, p);
+					statement1.setLong(40, h);
+
+					statement1.execute();
+					System.out.println("ITEMS  DATA INSERTED   " + ++count8);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					System.out.println("Error occured IN ITEM" + count8++);
+				//	continue label1;
+				}
+
+			}
+			// ----------------------------------------------------------------------------------------------
+
+			// ----------------------------------------------------------------------------------------------
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				statement1.close();
+
+			} catch (Exception e) {
+				System.out.println("Exception in ps INSERT RECORD IN BATCH "
+						+ e);
+
+			}
+		}
+
+	}
+
+	public static void main(String args[]) throws ParserConfigurationException,
+			SAXException, IOException {
+		//long startTime = System.currentTimeMillis();
+		long lStartTime = new Date().getTime();
+		Handler handler1 = new Handler();
+		handler = handler1;
+
+		handler1.SAX_Parser();
+
+		/*System.out.println("end of program data inserted successfully");
+		long startTime = System.currentTimeMillis();
+
+		long total = 0;
+		for (int i = 0; i < 10000000; i++) {
+			total += i;
+		}
+
+		long stopTime = System.currentTimeMillis();
+		long elapsedTime = stopTime - startTime;
+
+		System.out.println("data inserted in table in seconds  " + elapsedTime);
+		
+		System.out.println("end of program data inserted successfully");
+		long endTime   = System.currentTimeMillis();
+		long totalTime = endTime - startTime;
+		System.out.println(totalTime);
+		System.out.println("data inserted in table in seconds  " + totalTime);*/
+		
+		
+		
+		long lEndTime = new Date().getTime();
+
+		long totalTime = lEndTime - lStartTime;
+		System.out.println(totalTime);
+		totalTime=totalTime/360000;
+		System.out.println("data inserted in table in seconds  " + totalTime);
+	}
+
+	public void SAX_Parser() {
+		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+		try {
+			SAXParser saxParser = saxParserFactory.newSAXParser();
+
+			System.out.println("hiiiiii");
+			File file = new File("F:\\ATP Automotive_PIES_2015-11-20.xml");
+			saxParser.parse(file, handler);
+
+			// List<Header> headerList = handler.getHeaderList();
+			// headerList.add(header);
+
+			// List<Trailer> trailerList = handler.gettTrailerList();
+			// trailerList.add(trailer);
+			// passinTRAILER(trailerList);
+
+		} catch (Exception e) {
+			System.out.println("byeeeee");
+			e.printStackTrace();
+
+		}
+	}
+
+	// List to hold Header object
+
+	/* data for HeaderInfo Table */
+	boolean bPIESVersion = false;
+	boolean bSubmissionType = false;
+	boolean bBlanketEffectiveDate = false;
+	boolean bParentAAIAID = false;
+	boolean bBrandOwnerAAIAID = false;
+	boolean bCurrencyCode = false;
+	boolean bLanguageCode = false;
+	boolean bTechnicalContact = false;
+	boolean bContactEmail = false;
+
+	// List to hold DigitalAssets object
+
+	// data for DigitalAssets Table
+	boolean bMaintenanceType = false;
+	boolean bFileName = false;
+	boolean bAssetType = false;
+	boolean bFileType = false;
+	boolean bRepresentation = false;
+	boolean bBackground = false;
+	boolean bOrientationView = false;
+	boolean bAssetDimensions_UOM = false;
+	boolean bAssetHeight = false;
+	boolean bAssetWidth = false;
+
+	// List to hold descriptions object
+	// data for description table
+
+	boolean bDes_MaintenanceType = false;
+	boolean bDescriptionCode = false;
+	boolean bDes_LanguageCode = false;
+	boolean bDescription = false;
+
+	// List to hold ExtendedInformation object
+	// data for ExtendedInformation table
+
+	boolean bExMaintenanceType = false;
+	boolean bEXPICode = false;
+	boolean bExLanguageCode = false;
+	boolean bExtendInfo = false;
+
+	// List to hold Prices object
+	// data for Prices table
+	boolean bPricing = false;
+	boolean bPricing_MaintenanceType = false;
+	boolean bPriceType = false;
+	boolean bPriceSheetNumber = false;
+	boolean bPrice_CurrencyCode = false;
+	boolean bEffectiveDate = false;
+	boolean bPrice_UOM = false;
+	boolean bPrice = false;
+	boolean bPrices = false;
+
+	// List to hold PriceSheets object
+	// data for PriceSheets table
+
+	boolean bPs_MaintenanceType = false;
+	boolean bPs_PriceSheetNumber = false;
+	boolean bPriceSheetName = false;
+	boolean bSupersededPriceSheetNumber = false;
+	boolean bPs_CurrencyCode = false;
+	boolean bPs_EffectiveDate = false;
+	boolean bPriceSheet = false;
+
+	// List to hold ProductAttributes object
+	// data for ProductAttributes table
+
+	boolean bProductAttribute_MaintenanceType = false;
+	boolean bAttributeID = false;
+	boolean bPADBAttribute = false;
+	boolean bProductAttribute_INFO = false;
+
+	// List to hold Trailer object
+	// data for Trailer table
+
+	boolean bItemCount = false;
+	boolean bTransactionDate = false;
+
+	// List to hold Item object
+	// data for Item table
+
+	boolean bItem_MaintenanceType = false;
+	boolean bHazardousMaterialCode = false;
+	boolean bItemLevelGTIN = false;
+	boolean bGTINQualifier = false;
+	boolean bPartNumber = false;
+	boolean bBrandAAIAID = false;
+	boolean bBrandLabel = false;
+	boolean bACESApplications = false;
+	boolean bItemQuantitySize_UOM = false;
+	boolean bItemQuantitySize = false;
+	boolean bContainerType = false;
+	boolean bQualifier = false;
+	boolean bQualifier_UOM = false;
+	boolean bQualifier_INFO = false;
+	boolean bItemEffectiveDate = false;
+	boolean bAvailableDate = false;
+	boolean bMinimumOrderQuantity_UOM = false;
+	boolean bMinimumOrderQuantity = false;
+	boolean bManufacturerProductCodes = false;
+	boolean bProductCodes_SubGroup = false;
+	boolean bAAIAProductCategoryCode = false;
+	boolean bPartTerminologyID = false;
+	boolean bVMRSCode = false;
+	boolean bPackage_MaintenanceType = false;
+	boolean bPackageLevelGTIN = false;
+	boolean bPackageBarCodeCharacters = false;
+	boolean bPackage_UOM = false;
+	boolean bQuantityofEaches = false;
+	boolean bInnerQuantity_UOM = false;
+	boolean bInnerQuantity = false;
+	boolean bOrderable = false;
+	boolean bDimension = false;
+	boolean bDimensions_Height = false;
+	boolean bDimensions_Width = false;
+	boolean bDimensions_Length = false;
+	boolean bWeights = false;
+	boolean bWeights_Weight = false;
+
+	@Override
+	public void startElement(String uri, String localName, String qName,
+			Attributes attributes) throws SAXException {
+
+		// for
+		// Header---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+
+		if (qName.equalsIgnoreCase("Header")) {
+
+			header = new Header();
+
+			if (headerList == null)
+				headerList = new ArrayList<Header>();
+		} else if (qName.equalsIgnoreCase("PIESVersion")) {
+			bPIESVersion = true;
+		} else if (qName.equalsIgnoreCase("SubmissionType")) {
+			bSubmissionType = true;
+		} else if (qName.equalsIgnoreCase("BlanketEffectiveDate")) {
+			bBlanketEffectiveDate = true;
+		} else if (qName.equalsIgnoreCase("ParentAAIAID")) {
+			bParentAAIAID = true;
+		} else if (qName.equalsIgnoreCase("BrandOwnerAAIAID")) {
+			bBrandOwnerAAIAID = true;
+		} else if (qName.equalsIgnoreCase("CurrencyCode")) {
+			bCurrencyCode = true;
+		} else if (qName.equalsIgnoreCase("LanguageCode")) {
+			bLanguageCode = true;
+		} else if (qName.equalsIgnoreCase("TechnicalContact")) {
+			bTechnicalContact = true;
+		} else if (qName.equalsIgnoreCase("ContactEmail")) {
+			bContactEmail = true;
+		}
+
+		// for
+		// PriceSheets---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+
+		
+		else if (qName.equalsIgnoreCase("PriceSheets")){
+			
+			
+		
+			
+		}
+		else if(qName.equalsIgnoreCase("PriceSheet")){
+			 String id = attributes.getValue("MaintenanceType");
+				
+
+			 pricessheets = new PriceSheets();
+			 pricessheets.setPs_MaintenanceType(id);
+			 bPs_MaintenanceType=true;
+				if (pricesheetsList == null)
+					pricesheetsList = new ArrayList<PriceSheets>();
+		}
+
+		else if (qName.equalsIgnoreCase("PriceSheetNumber")) {
+			// String id = attributes.getValue("PriceSheetNumber");
+		//	pricessheets.setPs_PriceSheetNumber(id);
+			bPs_PriceSheetNumber = true;
+		}
+
+		else if (qName.equalsIgnoreCase("PriceSheetName")) {
+			// String id = attributes.getValue("PriceSheetName");
+
+			// pricessheets.setPriceSheetName(id);
+			bPriceSheetName = true;
+		}
+
+		else if (qName.equalsIgnoreCase("SupersededPriceSheetNumber")) {
+			// String id = attributes.getValue("SupersededPriceSheetNumber");
+			
+			// pricessheets.setSupersededPriceSheetNumber(id);
+			bSupersededPriceSheetNumber = true;
+		}
+
+		 else if (qName.equalsIgnoreCase("eCurrencyCode")) {
+			// String id = attributes.getValue("eCurrencyCode");
+			
+			
+		   //  pricessheets.setPs_CurrencyCode(id);
+		     bPs_CurrencyCode = true;
+				
+		}
+
+		else if (qName.equalsIgnoreCase("EffectiveDate")) {
+			// String id = attributes.getValue("Ps_EffectiveDate");
+
+			//pricessheets.setPs_EffectiveDate(id);
+			bPs_EffectiveDate = true;
+		}
+
+		// for
+		// Item---------------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+		
+
+		else if (qName.equalsIgnoreCase("Item")) {
+			System.out.println("item");
+			item = new Item();
+			
+			
+			String id = attributes.getValue("MaintenanceType");
+			item.setItem_MaintenanceType(id);
+			
+			
+		
+			if (itemList == null)
+				itemList = new ArrayList<Item>();
+		
+		} else if (qName.equalsIgnoreCase("HazardousMaterialCode")) {
+			String id = attributes.getValue("HazardousMaterialCode");
+			item.setHazardousMaterialCode(id);
+			bHazardousMaterialCode = true;
+		}if (qName.equalsIgnoreCase("ItemLevelGTIN")) {
+
+			String id=attributes.getValue("GTINQualifier");
+			String itemlevel=attributes.getValue("ItemLevelGTIN");
+			item.setGTINQualifier(id);
+			item.setItemLevelGTIN(itemlevel);
+			bItemLevelGTIN=true;
+			}
+			
+		 else if (qName.equalsIgnoreCase("PartNumber")) {
+			String id = attributes.getValue("PartNumber");
+			item.setPartNumber(id);
+			bPartNumber = true;
+		} else if (qName.equalsIgnoreCase("BrandAAIAID")) {
+			String id = attributes.getValue("BrandAAIAID");
+			item.setBrandAAIAID(id);
+			bBrandAAIAID = true;
+		} else if (qName.equalsIgnoreCase("BrandLabel")) {
+			String id = attributes.getValue("BrandLabel");
+			item.setBrandLabel(id);
+			bBrandLabel = true;
+		} else if (qName.equalsIgnoreCase("ACESApplications")) {
+			String id = attributes.getValue("ACESApplications");
+			item.setACESApplications(id);
+			bACESApplications = true;
+		} else if (qName.equalsIgnoreCase("ItemQuantitySize")) {
+			 String id = attributes.getValue("UOM");
+			 String size = attributes.getValue("ItemQuantitySize");
+			 
+			 item.setItemQuantitySize_UOM(id);
+			 item.setItemQuantitySize(size);
+			
+			 bItemQuantitySize = true;
+		} else if (qName.equalsIgnoreCase("ContainerType")) {
+			String id = attributes.getValue("ContainerType");
+			item.setContainerType(id);
+			bContainerType = true;
+		
+		} else if (qName.equalsIgnoreCase("QuantityPerApplication")) {
+			String id = attributes.getValue("Qualifier");
+			String uom = attributes.getValue("UOM");
+			String inform = attributes.getValue("QuantityPerApplication");
+			item.setQualifier(id);
+			item.setQualifier_UOM(uom);
+			item.setQualifier_INFO(inform);
+			bQualifier_INFO = true;
+		} else if (qName.equalsIgnoreCase("ItemEffectiveDate")) {
+			String id = attributes.getValue("ItemEffectiveDate");
+			item.setItemEffectiveDate(id);
+			bItemEffectiveDate = true;
+		} else if (qName.equalsIgnoreCase("AvailableDate")) {
+			String id = attributes.getValue("AvailableDate");
+			item.setAvailableDate(id);
+			bAvailableDate = true;
+		}  else if (qName.equalsIgnoreCase("MinimumOrderQuantity")) {
+			String id = attributes.getValue("UOM");
+			String miniquantity = attributes.getValue("MinimumOrderQuantity");
+			item.setMinimumOrderQuantity_UOM(id);;
+			item.setMinimumOrderQuantity(miniquantity);
+			bMinimumOrderQuantity = true;
+		} else if (qName.equalsIgnoreCase("ManufacturerProductCodes")) {
+			String id = attributes.getValue("ManufacturerProductCodes");
+			item.setManufacturerProductCodes(id);
+			bManufacturerProductCodes = true;
+		} else if (qName.equalsIgnoreCase("SubGroup")) {
+			String id = attributes.getValue("ProductCodes_SubGroup");
+			item.setProductCodes_SubGroup(id);
+			bProductCodes_SubGroup = true;
+		} else if (qName.equalsIgnoreCase("AAIAProductCategoryCode")) {
+			String id = attributes.getValue("AAIAProductCategoryCode");
+			item.setAAIAProductCategoryCode(id);
+			bAAIAProductCategoryCode = true;
+		} else if (qName.equalsIgnoreCase("PartTerminologyID")) {
+			String id = attributes.getValue("PartTerminologyID");
+			item.setPartTerminologyID(id);
+			bPartTerminologyID = true;
+		} else if (qName.equalsIgnoreCase("VMRSCode")) {
+			String id = attributes.getValue("VMRSCode");
+			item.setVMRSCode(id);
+			bVMRSCode = true;
+		} else if (qName.equalsIgnoreCase("Package")) {
+			String id = attributes.getValue("MaintenanceType");
+			item.setPackage_MaintenanceType(id);
+			//bPackage_MaintenanceType = true;
+		} else if (qName.equalsIgnoreCase("PackageLevelGTIN")) {
+			String id = attributes.getValue("PackageLevelGTIN");
+			item.setPackageLevelGTIN(id);
+			bPackageLevelGTIN = true;
+		} else if (qName.equalsIgnoreCase("PackageBarCodeCharacters")) {
+			String id = attributes.getValue("PackageBarCodeCharacters");
+			item.setPackageBarCodeCharacters(id);
+			bPackageBarCodeCharacters = true;
+		} else if (qName.equalsIgnoreCase("PackageUOM")) {
+			String id = attributes.getValue("Package_UOM");
+			item.setPackage_UOM(id);
+			bPackage_UOM = true;
+		} else if (qName.equalsIgnoreCase("QuantityofEaches")) {
+			String id = attributes.getValue("QuantityofEaches");
+			item.setQuantityofEaches(id);
+			bQuantityofEaches = true;
+		} else if (qName.equalsIgnoreCase("InnerQuantity")) {
+			 String id = attributes.getValue("InnerQuantityUOM");
+			String inner = attributes.getValue("InnerQuantity");
+			
+			item.setInnerQuantity_UOM(id);
+			item.setInnerQuantity(inner);
+			bInnerQuantity = true;
+		} else if (qName.equalsIgnoreCase("Orderable")) {
+			String id = attributes.getValue("Orderable");
+			item.setOrderable(id);
+			bOrderable = true;
+		} else if (qName.equalsIgnoreCase("Dimensions")) {
+			String id = attributes.getValue("Dimensions UOM");
+			item.setDimensions_UOM(id);
+			bDimension = true;
+		} else if (qName.equalsIgnoreCase("Height")) {
+			String id = attributes.getValue("Dimensions_Height");
+			item.setDimensions_Height(id);
+			bDimensions_Height = true;
+		} else if (qName.equalsIgnoreCase("Width")) {
+			String id = attributes.getValue("Dimensions_Width");
+			item.setDimensions_Width(id);
+			bDimensions_Width = true;
+		} else if (qName.equalsIgnoreCase("Length")) {
+			String id = attributes.getValue("Dimensions_Length");
+			item.setDimensions_Length(id);
+			bDimensions_Length = true;
+		} else if (qName.equalsIgnoreCase("Weights")) {
+			String id = attributes.getValue("UOM");
+			item.setWeights_UOM(id);
+			bWeights = true;
+		} else if (qName.equalsIgnoreCase("Weight")) {
+			String id = attributes.getValue("Weights_Weight");
+			item.setWeights_Weight(id);
+			bWeights_Weight = true;
+		}
+
+		// for
+		// Description---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+		else if (qName.equalsIgnoreCase("Descriptions")){
+			
+		}
+
+		else if (qName.equalsIgnoreCase("Description")) {
+			System.out.println("description");
+			descriptions = new Descriptions();
+			bDescription=true;
+		
+			String id = attributes.getValue("Description");
+			descriptions.setDescription(id);
+			
+			
+			
+			String main = attributes.getValue("MaintenanceType");
+			descriptions.setDes_MaintenanceType(main);
+		
+			
+			String descode = attributes.getValue("DescriptionCode");
+			descriptions.setDescriptionCode(descode);
+		
+			
+			String language = attributes.getValue("LanguageCode");
+			descriptions.setDes_LanguageCode(language);
+			
+			if (descriptionsList == null)
+				descriptionsList = new ArrayList<Descriptions>();
+		}
+
+
+		// for
+		// Prices---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+		else if (qName.equalsIgnoreCase("Prices")){
+			
+		}
+		
+		else if (qName.equalsIgnoreCase("Pricing")) {
+			
+			prices = new Prices();
+			
+			String main =attributes.getValue("MaintenanceType");
+			String price =attributes.getValue("PriceType");
+
+			prices.setPricing_MaintenanceType(main);
+			prices.setPriceType(price);
+			bPricing=true;
+			
+			
+			if (pricesList == null)
+			pricesList = new ArrayList<Prices>();	
+		}
+	/*	else if (qName.equalsIgnoreCase("PriceSheetNumber")) {
+			String id = attributes.getValue("PriceSheetNumber");
+			prices.setPriceSheetNumber(id);
+			bPriceSheetNumber = true;
+		}
+
+		else if (qName.equalsIgnoreCase("CurrencyCode")) {
+			String id = attributes.getValue("CurrencyCode");
+			System.out.print(id);
+			prices.setPrice_CurrencyCode(id);
+			bPrice_CurrencyCode = true;
+		}
+		
+
+		else if (qName.equalsIgnoreCase("EffectiveDate")) {
+			 String id = attributes.getValue("EffectiveDate");
+ 				prices.setEffectiveDate(id);
+			bEffectiveDate = true;
+		}
+*/
+		else if (qName.equalsIgnoreCase("Price")) {
+			String uom = attributes.getValue("UOM");
+			String id = attributes.getValue("Price");
+			prices.setPrice_UOM(uom);
+			prices.setPrice(id);
+			bPrice = true;
+			}
+		
+			
+
+		
+
+		// for Extended
+		// information---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+
+		else if (qName.equalsIgnoreCase("ExtendedInformation"))
+		{
+			
+		}
+		else if (qName.equalsIgnoreCase("ExtendedProductInformation")) {			
+			System.out.println("Extendedinformation");
+			extendedinformation = new ExtendedInformation();
+			
+			String main = attributes.getValue("MaintenanceType");
+			extendedinformation.setExMaintenanceType(main);
+			
+
+			String expi = attributes.getValue("EXPICode");
+			extendedinformation.setEXPICode(expi);
+			
+
+			String language = attributes.getValue("LanguageCode");
+			extendedinformation.setExLanguageCode(language);
+			//bLanguageCode=true;
+			
+			
+			String info = attributes.getValue("ExtendedProductInformation");
+			extendedinformation.setExtendInfo(info);
+			bExtendInfo=true;
+			
+			if (extendinfoList == null)
+				extendinfoList = new ArrayList<ExtendedInformation>();
+			
+			
+			 
+
+		
+
+		}
+
+	
+
+		// for Product
+		// Attributes---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+		 else if (qName.equalsIgnoreCase("ProductAttributes")) 
+		 {
+			 
+		 }
+		 else if (qName.equalsIgnoreCase("ProductAttribute")) {
+			System.out.println("productattributes");
+			productattributes = new ProductAttributes();
+			
+		 
+			String id = attributes.getValue("MaintenanceType");
+			productattributes.setProductAttribute_MaintenanceType(id);
+			//bProductAttribute_MaintenanceType = true;
+			
+			String attId = attributes.getValue("AttributeID");
+			productattributes.setAttributeID(attId);
+		//	bAttributeID = true;
+			
+			String padba = attributes.getValue("PADBAttribute");
+			productattributes.setPADBAttribute(padba);
+		//	bPADBAttribute = true;
+			
+			String info = attributes.getValue("ProductAttribute");
+			productattributes.setProductAttribute_INFO(info);
+		//	bProductAttribute_INFO = true;
+			
+			if (productattributesList == null)
+				productattributesList = new ArrayList<ProductAttributes>();
+		 
+		}
+
+		
+
+
+
+
+		// for
+		// DigitalAssets---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+
+		else if (qName.equalsIgnoreCase("DigitalAssets")) 
+		{
+		}
+		
+			else if (qName.equalsIgnoreCase("DigitalFileInformation"))
+			{
+			digitalasset = new DigitalAssets();
+			
+			String id = attributes.getValue("MaintenanceType");
+			digitalasset.setMaintenanceType(id);
+			
+			if (digitalassetList == null)
+			digitalassetList = new ArrayList<DigitalAssets>();
+			
+		}
+
+			
+		
+		
+
+		else if (qName.equalsIgnoreCase("FileName")) {
+		//	String id = attributes.getValue("FileName");
+		//	digitalasset.setFileName(id);
+			bFileName = true;
+		}
+
+		else if (qName.equalsIgnoreCase("AssetType")) {
+		//	String id = attributes.getValue("AssetType");
+		//	digitalasset.setAssetType(id);
+			bAssetType = true;
+		}
+
+		else if (qName.equalsIgnoreCase("FileType")) {
+		//	String id = attributes.getValue("FileType");
+		//	digitalasset.setAssetType(id);
+			bFileType = true;
+		}
+
+		else if (qName.equalsIgnoreCase("Representation")) {
+		//	String id = attributes.getValue("Representation");
+		//	digitalasset.setRepresentation(id);
+			bRepresentation = true;
+		}
+
+		else if (qName.equalsIgnoreCase("Background")) {
+		//	String id = attributes.getValue("Background");
+		//	digitalasset.setMaintenanceType(id);
+			bBackground = true;
+		}
+
+		else if (qName.equalsIgnoreCase("OrientationView")) {
+			//String id = attributes.getValue("OrientationView");
+		//	digitalasset.setOrientationView(id);
+			bOrientationView = true;
+		}
+
+		else if (qName.equalsIgnoreCase("AssetDimensions")) {
+			//String id = attributes.getValue("AssetDimensions_UOM");
+			//digitalasset.setAssetDimensions_UOM(id);
+			bAssetDimensions_UOM = true;
+		}
+
+		else if (qName.equalsIgnoreCase("AssetHeight")) {
+		//	String id = attributes.getValue("AssetHeight");
+		//	digitalasset.setAssetHeight(id);
+			bAssetHeight = true;
+		}
+
+		else if (qName.equalsIgnoreCase("AssetWidth")) {
+			//String id = attributes.getValue("AssetWidth");
+		//	digitalasset.setAssetWidth(id);
+			bAssetWidth = true;
+		}
+
+		// for
+		// Trailer---------------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------------------------
+
+		else if (qName.equalsIgnoreCase("Trailer")) {
+			// System.out.println("trailer");
+			trailer = new Trailer();
+			if (trailerList == null)
+				trailerList = new ArrayList<Trailer>();
+			
+		} else if (qName.equalsIgnoreCase("ItemCount")) {
+			//String id = attributes.getValue("ItemCount");
+			//trailer.setItemCount(id);
+			bItemCount = true;
+		} else if (qName.equalsIgnoreCase("TransactionDate")) {
+			//String id = attributes.getValue("TransactionDate");
+			//trailer.setTransactionDate(id);
+			bTransactionDate = true;
+		}
+
+	}
+
+	public void endElement(String uri, String localName, String qName)
+			throws SAXException {
+
+		if (qName.equalsIgnoreCase("Header")) {
+			headerList.add(header);
+			passinHeader(headerList);
+		}
+
+		if (qName.equalsIgnoreCase("Trailer")) {
+			trailerList.add(trailer);
+		//	 if (trailerList.size() == 1000)
+			passinTRAILER(trailerList);
+			// trailerList=null;
+		}
+
+		if (qName.equalsIgnoreCase("Item")) {
+
+			itemList.add(item);
+			if (itemList.size() == 1000)
+			{
+				passinItem(itemList);
+				itemList = null;
+			}
+
+		}
+
+		if (qName.equalsIgnoreCase("PriceSheet")) {
+
+			pricesheetsList.add(pricessheets);
+			// if (pricesheetsList.size() == 500) {
+			passinPRICESHEETS(pricesheetsList);
+			// pricesheetsList = null;
+		}
+
+		// }
+
+		if (qName.equalsIgnoreCase("Description")) {
+
+			descriptionsList.add(descriptions);
+			// if (descriptionsList.size() == 1000)
+			 {
+			passinDESCRIPTION(descriptionsList);
+			// descriptionsList = null;
+		}
+
+		 }
+
+		if (qName.equalsIgnoreCase("Pricing")) {
+
+			pricesList.add(prices);
+			if(pricesList.size()==1000)
+			{
+				passinPRICES(pricesList);
+				pricesList=null;	
+			}
+
+		}
+
+		if (qName.equalsIgnoreCase("ExtendedInformation")) {
+
+			extendinfoList.add(extendedinformation);
+			 if (extendinfoList.size() == 1000)
+			{
+				passinEXINFORMATION(extendinfoList);
+				extendinfoList = null;
+			}
+
+		}
+
+		if (qName.equalsIgnoreCase("ProductAttribute")) {
+
+			productattributesList.add(productattributes);
+			 if (productattributesList.size() == 1000)
+			{
+				passinPRODUCTATTRIBUTES(productattributesList);
+				 productattributesList = null;
+			}
+
+		}
+
+		if (qName.equalsIgnoreCase("DigitalFileInformation")) {
+
+			digitalassetList.add(digitalasset);
+			 if (digitalassetList.size() == 1000)
+			{
+				passinDIGITALASSETS(digitalassetList);
+				 digitalassetList = null;
+			}	
+		}
+		
+				
+	}
+
+	@Override
+	public void characters(char ch[], int start, int length)
+			throws SAXException {
+		
+		if (bPIESVersion) {
+
+			header.setPIESVersion(new String(ch, start, length));
+			bPIESVersion = false;
+		} else if (bSubmissionType) {
+			header.setSubmissionType(new String(ch, start, length));
+			bSubmissionType = false;
+		} else if (bBlanketEffectiveDate) {
+			header.setBlanketEffectiveDate(new String(ch, start, length));
+			bBlanketEffectiveDate = false;
+		} else if (bParentAAIAID) {
+			header.setParentAAIAID(new String(ch, start, length));
+			bParentAAIAID = false;
+		}
+
+		else if (bBrandOwnerAAIAID) {
+			header.setBrandOwnerAAIAID(new String(ch, start, length));
+			bBrandOwnerAAIAID = false;
+		}
+
+		if (bCurrencyCode) {
+			header.setCurrencyCode(new String(ch, start, length));
+			bCurrencyCode = false;
+		}
+
+		else if (bLanguageCode) {
+			header.setLanguageCode(new String(ch, start, length));
+			bLanguageCode = false;
+		}
+
+		else if (bTechnicalContact) {
+			header.setTechnicalContact(new String(ch, start, length));
+			bTechnicalContact = false;
+		}
+
+		else if (bContactEmail) {
+			header.setContactEmail(new String(ch, start, length));
+			bContactEmail = false;
+		}
+
+		// Method for
+		// PriceSheets---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+
+		else if (bPs_PriceSheetNumber) {
+			pricessheets.setPs_PriceSheetNumber(new String(ch, start, length));
+			bPs_PriceSheetNumber = false;
+		}
+
+		else if (bPriceSheetName) {
+			pricessheets.setPriceSheetName(new String(ch, start, length));
+			bPriceSheetName = false;
+		}
+
+		else if (bSupersededPriceSheetNumber) {
+			pricessheets.setSupersededPriceSheetNumber(new String(ch, start,
+					length));
+			bSupersededPriceSheetNumber = false;
+		}
+
+		else if (bPs_CurrencyCode) {
+			pricessheets.setPs_CurrencyCode(new String(ch, start, length));
+			bPs_CurrencyCode = false;
+		}
+
+		else if (bPs_EffectiveDate) {
+			pricessheets.setPs_EffectiveDate(new String(ch, start, length));
+			bPs_EffectiveDate = false;
+		}
+
+		else if (bPriceSheet) {
+			pricessheets.setPriceSheet(new String(ch, start, length));
+			bPriceSheet = false;
+		}
+
+		// Method for
+		// Item---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bItem_MaintenanceType) {
+			System.out.println("item");
+			item.setItem_MaintenanceType(new String(ch, start, length));
+			bItem_MaintenanceType = false;
+		}
+
+		else if (bHazardousMaterialCode) {
+			item.setHazardousMaterialCode(new String(ch, start, length));
+			bHazardousMaterialCode = false;
+		}
+
+		else if (bItemLevelGTIN) {
+			item.setItemLevelGTIN(new String(ch, start, length));
+		
+			bItemLevelGTIN = false;
+		}
+
+		else if (bGTINQualifier) {
+			item.setGTINQualifier(new String(ch, start, length));
+			bGTINQualifier = false;
+		}
+
+		else if (bPartNumber) {
+			item.setPartNumber(new String(ch, start, length));
+			bPartNumber = false;
+		}
+
+		else if (bBrandAAIAID) {
+			item.setBrandAAIAID(new String(ch, start, length));
+			bBrandAAIAID = false;
+		}
+
+		else if (bBrandLabel) {
+			item.setBrandLabel(new String(ch, start, length));
+			bBrandLabel = false;
+		}
+
+		else if (bACESApplications) {
+			item.setACESApplications(new String(ch, start, length));
+			bACESApplications = false;
+		}
+
+		else if (bItemQuantitySize_UOM) {
+			item.setItemQuantitySize_UOM(new String(ch, start, length));
+			bItemQuantitySize_UOM = false;
+		}
+
+		else if (bItemQuantitySize) {
+			item.setItemQuantitySize(new String(ch, start, length));
+			bItemQuantitySize = false;
+		}
+
+		else if (bContainerType) {
+			item.setContainerType(new String(ch, start, length));
+			bContainerType = false;
+		}
+
+		else if (bQualifier) {
+			item.setQualifier(new String(ch, start, length));
+			bQualifier = false;
+		}
+
+		else if (bQualifier_UOM) {
+			item.setQualifier_UOM(new String(ch, start, length));
+			bQualifier_UOM = false;
+		}
+
+		else if (bQualifier_INFO) {
+			item.setQualifier_INFO(new String(ch, start, length));
+			bQualifier_INFO = false;
+		}
+
+		else if (bItemEffectiveDate) {
+			item.setItemEffectiveDate(new String(ch, start, length));
+			bItemEffectiveDate = false;
+		}
+
+		else if (bAvailableDate) {
+			item.setAvailableDate(new String(ch, start, length));
+			bAvailableDate = false;
+		}
+
+		else if (bMinimumOrderQuantity_UOM) {
+			item.setMinimumOrderQuantity_UOM(new String(ch, start, length));
+			bMinimumOrderQuantity_UOM = false;
+		}
+
+		else if (bMinimumOrderQuantity) {
+			item.setMinimumOrderQuantity(new String(ch, start, length));
+			bMinimumOrderQuantity = false;
+		}
+
+		else if (bManufacturerProductCodes) {
+			item.setManufacturerProductCodes(new String(ch, start, length));
+			bManufacturerProductCodes = false;
+		}
+
+		else if (bProductCodes_SubGroup) {
+			item.setProductCodes_SubGroup(new String(ch, start, length));
+			bProductCodes_SubGroup = false;
+		}
+
+		else if (bAAIAProductCategoryCode) {
+			item.setAAIAProductCategoryCode(new String(ch, start, length));
+			bAAIAProductCategoryCode = false;
+		}
+
+		else if (bPartTerminologyID) {
+			item.setPartTerminologyID(new String(ch, start, length));
+			bPartTerminologyID = false;
+		}
+
+		else if (bVMRSCode) {
+			item.setVMRSCode(new String(ch, start, length));
+			bVMRSCode = false;
+		}
+
+		else if (bPackage_MaintenanceType) {
+			item.setPackage_MaintenanceType(new String(ch, start, length));
+			bPackage_MaintenanceType = false;
+		}
+
+		else if (bPackageLevelGTIN) {
+			item.setPackageLevelGTIN(new String(ch, start, length));
+			bPackageLevelGTIN = false;
+		}
+
+		else if (bPackageBarCodeCharacters) {
+			item.setPackageBarCodeCharacters(new String(ch, start, length));
+			bPackageBarCodeCharacters = false;
+		}
+
+		else if (bPackage_UOM) {
+			item.setPackage_UOM(new String(ch, start, length));
+			bPackage_UOM = false;
+		}
+
+		else if (bQuantityofEaches) {
+			item.setQuantityofEaches(new String(ch, start, length));
+			bQuantityofEaches = false;
+		}
+
+		else if (bInnerQuantity_UOM) {
+			item.setInnerQuantity_UOM(new String(ch, start, length));
+			bInnerQuantity_UOM = false;
+		}
+
+		else if (bInnerQuantity) {
+			item.setInnerQuantity(new String(ch, start, length));
+			bInnerQuantity = false;
+		}
+
+		else if (bOrderable) {
+			item.setOrderable(new String(ch, start, length));
+			bOrderable = false;
+		}
+
+		else if (bDimension) {
+			item.setDimensions_UOM(new String(ch, start, length));
+			bDimension = false;
+		}
+
+		else if (bDimensions_Height) {
+			item.setDimensions_Height(new String(ch, start, length));
+			bDimensions_Height = false;
+		}
+
+		else if (bDimensions_Width) {
+			item.setDimensions_Width(new String(ch, start, length));
+			bDimensions_Width = false;
+		}
+
+		else if (bDimensions_Length) {
+			item.setDimensions_Length(new String(ch, start, length));
+			bDimensions_Length = false;
+		}
+
+		else if (bWeights) {
+			item.setWeights_UOM(new String(ch, start, length));
+			bWeights = false;
+		}
+
+		else if (bWeights_Weight) {
+			item.setWeights_Weight(new String(ch, start, length));
+			bWeights_Weight = false;
+		}
+
+		// Method for
+		// Description---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bDes_MaintenanceType) {
+			System.out.println("Description");
+			descriptions.setDes_MaintenanceType(new String(ch, start, length));
+			bDes_MaintenanceType = false;
+		}
+
+		else if (bDescriptionCode) {
+			descriptions.setDescriptionCode(new String(ch, start, length));
+			bDescriptionCode = false;
+		}
+
+		else if (bDes_LanguageCode) {
+			descriptions.setDes_LanguageCode(new String(ch, start, length));
+			bDes_LanguageCode = false;
+		}
+
+		else if (bDescription) {
+			descriptions.setDescription(new String(ch, start, length));
+			bDescription = false;
+		}
+
+		// Method for
+		// Prices---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bPricing) {
+			prices.setPricing(new String(ch, start, length));
+			bPricing = false;
+		} 
+	    else if (bPricing_MaintenanceType) {
+			
+			prices.setPricing_MaintenanceType(new String(ch, start, length));
+			bPricing_MaintenanceType = false;
+		}
+
+		else if (bPriceType) {
+			prices.setPriceType(new String(ch, start, length));
+			bPriceType = false;
+		}
+
+		else if (bPriceSheetNumber) {
+			prices.setPriceSheetNumber(new String(ch, start, length));
+			bPriceSheetNumber = false;
+		}
+
+		else if (bPrice_CurrencyCode) {
+			prices.setPrice_CurrencyCode(new String(ch, start, length));
+			bPrice_CurrencyCode = false;
+		}
+
+		else if (bEffectiveDate) {
+			prices.setEffectiveDate(new String(ch, start, length));
+			bEffectiveDate = false;
+		}
+		
+
+		else if (bPrice_UOM) {
+			prices.setPrice_UOM(new String(ch, start, length));
+			bPrice_UOM = false;
+		}
+
+		else if (bPrice) {
+			prices.setPrice(new String(ch, start, length));
+			bPrice = false;
+		}
+
+		// Method for
+		// ExtendedInformation---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bExMaintenanceType) {
+			System.out.println("Extenedinformation");
+			extendedinformation.setExMaintenanceType(new String(ch, start,
+					length));
+			bExMaintenanceType = false;
+		}
+
+		else if (bEXPICode) {
+			extendedinformation.setEXPICode(new String(ch, start, length));
+			bEXPICode = false;
+		}
+
+		else if (bExLanguageCode) {
+			extendedinformation
+					.setExLanguageCode(new String(ch, start, length));
+			bExLanguageCode = false;
+		}
+
+		else if (bExtendInfo) {
+			extendedinformation.setExtendInfo(new String(ch, start, length));
+			bExtendInfo = false;
+		}
+
+		// Method for Product
+		// attribute---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bProductAttribute_MaintenanceType) {
+			productattributes.setProductAttribute_MaintenanceType(new String(
+					ch, start, length));
+			bProductAttribute_MaintenanceType = false;
+		}
+
+		else if (bAttributeID) {
+			productattributes.setAttributeID(new String(ch, start, length));
+			bAttributeID = false;
+		}
+
+		else if (bPADBAttribute) {
+			productattributes.setPADBAttribute(new String(ch, start, length));
+			bPADBAttribute = false;
+		}
+
+		else if (bProductAttribute_INFO) {
+			productattributes.setProductAttribute_INFO(new String(ch, start,
+					length));
+			bProductAttribute_INFO = false;
+		}
+
+		// Method for
+		// DigitalAssets---------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bMaintenanceType) {
+			System.out.println("DigitalAssets");
+			digitalasset.setMaintenanceType(new String(ch, start, length));
+			bMaintenanceType = false;
+		}
+
+		else if (bFileName) {
+			digitalasset.setFileName(new String(ch, start, length));
+			bFileName = false;
+		}
+
+		else if (bAssetType) {
+			digitalasset.setAssetType(new String(ch, start, length));
+			bAssetType = false;
+		}
+
+		else if (bRepresentation) {
+			digitalasset.setRepresentation(new String(ch, start, length));
+			bRepresentation = false;
+		}
+
+		else if (bBackground) {
+			digitalasset.setBackground(new String(ch, start, length));
+			bBackground = false;
+		}
+
+		else if (bOrientationView) {
+			digitalasset.setOrientationView(new String(ch, start, length));
+			bOrientationView = false;
+		}
+
+		else if (bAssetDimensions_UOM) {
+			digitalasset.setAssetDimensions_UOM(new String(ch, start, length));
+			bAssetDimensions_UOM = false;
+		}
+
+		else if (bAssetHeight) {
+			digitalasset.setAssetHeight(new String(ch, start, length));
+			bAssetHeight = false;
+		}
+
+		else if (bAssetWidth) {
+			digitalasset.setAssetWidth(new String(ch, start, length));
+			bAssetWidth = false;
+		}
+
+		// Method for
+		// Trailer----------------------------------------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------------------------------------------
+
+		else if (bItemCount) {
+			System.out.println(" Trailer");
+			trailer.setItemCount(new String(ch, start, length));
+			bItemCount = false;
+		}
+
+		else if (bTransactionDate) {
+			trailer.setTransactionDate(new String(ch, start, length));
+			bTransactionDate = false;
+		}
+
+	}
+
+}
