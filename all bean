@@ -1,0 +1,1393 @@
+package parsingPies;
+
+public class AssetDimensions {
+	private long aDId;
+	private String assetDimensionsUom;
+	private String assetHeight;
+	private String assetWidth;
+	public AssetDimensions() {
+		super();
+	}
+	public AssetDimensions(long aDId, String assetDimensionsUom,
+			String assetHeight, String assetWidth) {
+		super();
+		this.aDId = aDId;
+		this.assetDimensionsUom = assetDimensionsUom;
+		this.assetHeight = assetHeight;
+		this.assetWidth = assetWidth;
+	}
+	public long getaDId() {
+		return aDId;
+	}
+	public void setaDId(long aDId) {
+		this.aDId = aDId;
+	}
+	public String getAssetDimensionsUom() {
+		return assetDimensionsUom;
+	}
+	public void setAssetDimensionsUom(String assetDimensionsUom) {
+		this.assetDimensionsUom = assetDimensionsUom;
+	}
+	public String getAssetHeight() {
+		return assetHeight;
+	}
+	public void setAssetHeight(String assetHeight) {
+		this.assetHeight = assetHeight;
+	}
+	public String getAssetWidth() {
+		return assetWidth;
+	}
+	public void setAssetWidth(String assetWidth) {
+		this.assetWidth = assetWidth;
+	}
+}
+
+package parsingPies;
+
+public class Descriptions 
+{
+	private String description;
+	private String descriptionCode;
+	private String descriptionMaintenanceType;
+	private String languageCode;
+	public Descriptions() {
+		super();
+	}
+	public Descriptions(String description, String descriptionCode,
+			String descriptionMaintenanceType, String languageCode) {
+		super();
+		this.description = description;
+		this.descriptionCode = descriptionCode;
+		this.descriptionMaintenanceType = descriptionMaintenanceType;
+		this.languageCode = languageCode;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDescriptionCode() {
+		return descriptionCode;
+	}
+	public void setDescriptionCode(String descriptionCode) {
+		this.descriptionCode = descriptionCode;
+	}
+	public String getDescriptionMaintenanceType() {
+		return descriptionMaintenanceType;
+	}
+	public void setDescriptionMaintenanceType(String descriptionMaintenanceType) {
+		this.descriptionMaintenanceType = descriptionMaintenanceType;
+	}
+	public String getLanguageCode() {
+		return languageCode;
+	}
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+} 
+
+package parsingPies;
+
+public class DigitalAssets {
+	private long dAid;
+	private String digitalFileInformationMaintenanceType;
+	private String digitalLanguageCode;
+	private String fileName;
+	private String assetType;
+	private String fileType;
+	private String representation;
+	private String orientationView;
+	public DigitalAssets() {
+		super();
+	}
+	public DigitalAssets(long dAid,
+			String digitalFileInformationMaintenanceType,
+			String digitalLanguageCode, String fileName, String assetType,
+			String fileType, String representation, String orientationView) {
+		super();
+		this.dAid = dAid;
+		this.digitalFileInformationMaintenanceType = digitalFileInformationMaintenanceType;
+		this.digitalLanguageCode = digitalLanguageCode;
+		this.fileName = fileName;
+		this.assetType = assetType;
+		this.fileType = fileType;
+		this.representation = representation;
+		this.orientationView = orientationView;
+	}
+	public long getdAid() {
+		return dAid;
+	}
+	public void setdAid(long dAid) {
+		this.dAid = dAid;
+	}
+	public String getDigitalFileInformationMaintenanceType() {
+		return digitalFileInformationMaintenanceType;
+	}
+	public void setDigitalFileInformationMaintenanceType(
+			String digitalFileInformationMaintenanceType) {
+		this.digitalFileInformationMaintenanceType = digitalFileInformationMaintenanceType;
+	}
+	public String getDigitalLanguageCode() {
+		return digitalLanguageCode;
+	}
+	public void setDigitalLanguageCode(String digitalLanguageCode) {
+		this.digitalLanguageCode = digitalLanguageCode;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getAssetType() {
+		return assetType;
+	}
+	public void setAssetType(String assetType) {
+		this.assetType = assetType;
+	}
+	public String getFileType() {
+		return fileType;
+	}
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+	public String getRepresentation() {
+		return representation;
+	}
+	public void setRepresentation(String representation) {
+		this.representation = representation;
+	}
+	public String getOrientationView() {
+		return orientationView;
+	}
+	public void setOrientationView(String orientationView) {
+		this.orientationView = orientationView;
+	}
+}
+
+package parsingPies;
+
+public class Dimensions {
+	private long dId;
+	private String dimensionsUom;
+	private String height;
+	private String width;
+	private String length;
+	public Dimensions() {
+		super();
+	}
+	public Dimensions(long dId, String dimensionsUom, String height,
+			String width, String length) {
+		super();
+		this.dId = dId;
+		this.dimensionsUom = dimensionsUom;
+		this.height = height;
+		this.width = width;
+		this.length = length;
+	}
+	public long getdId() {
+		return dId;
+	}
+	public void setdId(long dId) {
+		this.dId = dId;
+	}
+	public String getDimensionsUom() {
+		return dimensionsUom;
+	}
+	public void setDimensionsUom(String dimensionsUom) {
+		this.dimensionsUom = dimensionsUom;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getWidth() {
+		return width;
+	}
+	public void setWidth(String width) {
+		this.width = width;
+	}
+	public String getLength() {
+		return length;
+	}
+	public void setLength(String length) {
+		this.length = length;
+	}
+}
+
+package parsingPies;
+
+public class ExtendedInformation {
+	private long eId;
+	private String eXPICode;
+	private String extendedProductInformation;
+	private String languageCode;
+	private String maintenanceType;
+	public ExtendedInformation() {
+		super();
+	}
+	public ExtendedInformation(long eId, String eXPICode,
+			String extendedProductInformation, String languageCode,
+			String maintenanceType) {
+		super();
+		this.eId = eId;
+		this.eXPICode = eXPICode;
+		this.extendedProductInformation = extendedProductInformation;
+		this.languageCode = languageCode;
+		this.maintenanceType = maintenanceType;
+	}
+	public long geteId() {
+		return eId;
+	}
+	public void seteId(long eId) {
+		this.eId = eId;
+	}
+	public String geteXPICode() {
+		return eXPICode;
+	}
+	public void seteXPICode(String eXPICode) {
+		this.eXPICode = eXPICode;
+	}
+	public String getExtendedProductInformation() {
+		return extendedProductInformation;
+	}
+	public void setExtendedProductInformation(String extendedProductInformation) {
+		this.extendedProductInformation = extendedProductInformation;
+	}
+	public String getLanguageCode() {
+		return languageCode;
+	}
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+	public String getMaintenanceType() {
+		return maintenanceType;
+	}
+	public void setMaintenanceType(String maintenanceType) {
+		this.maintenanceType = maintenanceType;
+	}
+}
+
+package parsingPies;
+
+
+public class Header {
+	private long hId;
+	private String blanketEffectiveDate;
+	private String brandOwnerAAIAID;
+	private String contactEmail;
+	private String currencyCode;
+	private String languageCode;
+	private String parentAAIAID; 
+	private String piesVersion;
+	private String submissionType;
+	private String technicalContact;
+	public Header() {
+		super();
+	}
+	public Header(long hId, String blanketEffectiveDate,
+			String brandOwnerAAIAID, String contactEmail, String currencyCode,
+			String languageCode, String parentAAIAID, String piesVersion,
+			String submissionType, String technicalContact) {
+		super();
+		this.hId = hId;
+		this.blanketEffectiveDate = blanketEffectiveDate;
+		this.brandOwnerAAIAID = brandOwnerAAIAID;
+		this.contactEmail = contactEmail;
+		this.currencyCode = currencyCode;
+		this.languageCode = languageCode;
+		this.parentAAIAID = parentAAIAID;
+		this.piesVersion = piesVersion;
+		this.submissionType = submissionType;
+		this.technicalContact = technicalContact;
+	}
+	public long gethId() {
+		return hId;
+	}
+	public void sethId(long hId) {
+		this.hId = hId;
+	}
+	public String getBlanketEffectiveDate() {
+		return blanketEffectiveDate;
+	}
+	public void setBlanketEffectiveDate(String blanketEffectiveDate) {
+		this.blanketEffectiveDate = blanketEffectiveDate;
+	}
+	public String getBrandOwnerAAIAID() {
+		return brandOwnerAAIAID;
+	}
+	public void setBrandOwnerAAIAID(String brandOwnerAAIAID) {
+		this.brandOwnerAAIAID = brandOwnerAAIAID;
+	}
+	public String getContactEmail() {
+		return contactEmail;
+	}
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+	public String getLanguageCode() {
+		return languageCode;
+	}
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+	public String getParentAAIAID() {
+		return parentAAIAID;
+	}
+	public void setParentAAIAID(String parentAAIAID) {
+		this.parentAAIAID = parentAAIAID;
+	}
+	public String getPiesVersion() {
+		return piesVersion;
+	}
+	public void setPiesVersion(String piesVersion) {
+		this.piesVersion = piesVersion;
+	}
+	public String getSubmissionType() {
+		return submissionType;
+	}
+	public void setSubmissionType(String submissionType) {
+		this.submissionType = submissionType;
+	}
+	public String getTechnicalContact() {
+		return technicalContact;
+	}
+	public void setTechnicalContact(String technicalContact) {
+		this.technicalContact = technicalContact;
+	}
+}
+package parsingPies;
+
+public class Items {
+	private long iId;
+	private String aAIAProductCategoryCode;
+	private String acesApplications;
+	private String availableDate;
+	private String baseItemId;
+	private String brandAAIAID;
+	private String brandLabel;
+	private String containerType;
+    private String itemMaintenanceType;
+    private String gtinQualifier;
+    private String hazardousMaterialCode;
+    private String itemEffectiveDate;
+    private String itemLevelGTIN;
+    private String itemQuantitySize;
+    private String itemQuantitySizeUom;
+    private String minimumOrderQuantity;
+    private String minimumOrderQuantityUOM;
+    private String partNumber;
+    private String partTerminologyID;
+    private String qualifier;
+    private String qualifierUom;
+    private String qualifierValue;
+    private String quantityPerApplication;
+    private String quantityPerApplicationQualifier;
+    private String quantityPerApplicationUom;
+    private String vMRSCode;
+	public Items() {
+		super();
+	}
+	public Items(long iId, String aAIAProductCategoryCode,
+			String acesApplications, String availableDate, String baseItemId,
+			String brandAAIAID, String brandLabel, String containerType,
+			String itemMaintenanceType, String gtinQualifier,
+			String hazardousMaterialCode, String itemEffectiveDate,
+			String itemLevelGTIN, String itemQuantitySize,
+			String itemQuantitySizeUom, String minimumOrderQuantity,
+			String minimumOrderQuantityUOM, String partNumber,
+			String partTerminologyID, String qualifier, String qualifierUom,
+			String qualifierValue, String quantityPerApplication,
+			String quantityPerApplicationQualifier,
+			String quantityPerApplicationUom, String vMRSCode) {
+		super();
+		this.iId = iId;
+		this.aAIAProductCategoryCode = aAIAProductCategoryCode;
+		this.acesApplications = acesApplications;
+		this.availableDate = availableDate;
+		this.baseItemId = baseItemId;
+		this.brandAAIAID = brandAAIAID;
+		this.brandLabel = brandLabel;
+		this.containerType = containerType;
+		this.itemMaintenanceType = itemMaintenanceType;
+		this.gtinQualifier = gtinQualifier;
+		this.hazardousMaterialCode = hazardousMaterialCode;
+		this.itemEffectiveDate = itemEffectiveDate;
+		this.itemLevelGTIN = itemLevelGTIN;
+		this.itemQuantitySize = itemQuantitySize;
+		this.itemQuantitySizeUom = itemQuantitySizeUom;
+		this.minimumOrderQuantity = minimumOrderQuantity;
+		this.minimumOrderQuantityUOM = minimumOrderQuantityUOM;
+		this.partNumber = partNumber;
+		this.partTerminologyID = partTerminologyID;
+		this.qualifier = qualifier;
+		this.qualifierUom = qualifierUom;
+		this.qualifierValue = qualifierValue;
+		this.quantityPerApplication = quantityPerApplication;
+		this.quantityPerApplicationQualifier = quantityPerApplicationQualifier;
+		this.quantityPerApplicationUom = quantityPerApplicationUom;
+		this.vMRSCode = vMRSCode;
+	}
+	public long getiId() {
+		return iId;
+	}
+	public void setiId(long iId) {
+		this.iId = iId;
+	}
+	public String getaAIAProductCategoryCode() {
+		return aAIAProductCategoryCode;
+	}
+	public void setaAIAProductCategoryCode(String aAIAProductCategoryCode) {
+		this.aAIAProductCategoryCode = aAIAProductCategoryCode;
+	}
+	public String getAcesApplications() {
+		return acesApplications;
+	}
+	public void setAcesApplications(String acesApplications) {
+		this.acesApplications = acesApplications;
+	}
+	public String getAvailableDate() {
+		return availableDate;
+	}
+	public void setAvailableDate(String availableDate) {
+		this.availableDate = availableDate;
+	}
+	public String getBaseItemId() {
+		return baseItemId;
+	}
+	public void setBaseItemId(String baseItemId) {
+		this.baseItemId = baseItemId;
+	}
+	public String getBrandAAIAID() {
+		return brandAAIAID;
+	}
+	public void setBrandAAIAID(String brandAAIAID) {
+		this.brandAAIAID = brandAAIAID;
+	}
+	public String getBrandLabel() {
+		return brandLabel;
+	}
+	public void setBrandLabel(String brandLabel) {
+		this.brandLabel = brandLabel;
+	}
+	public String getContainerType() {
+		return containerType;
+	}
+	public void setContainerType(String containerType) {
+		this.containerType = containerType;
+	}
+	public String getItemMaintenanceType() {
+		return itemMaintenanceType;
+	}
+	public void setItemMaintenanceType(String itemMaintenanceType) {
+		this.itemMaintenanceType = itemMaintenanceType;
+	}
+	public String getGtinQualifier() {
+		return gtinQualifier;
+	}
+	public void setGtinQualifier(String gtinQualifier) {
+		this.gtinQualifier = gtinQualifier;
+	}
+	public String getHazardousMaterialCode() {
+		return hazardousMaterialCode;
+	}
+	public void setHazardousMaterialCode(String hazardousMaterialCode) {
+		this.hazardousMaterialCode = hazardousMaterialCode;
+	}
+	public String getItemEffectiveDate() {
+		return itemEffectiveDate;
+	}
+	public void setItemEffectiveDate(String itemEffectiveDate) {
+		this.itemEffectiveDate = itemEffectiveDate;
+	}
+	public String getItemLevelGTIN() {
+		return itemLevelGTIN;
+	}
+	public void setItemLevelGTIN(String itemLevelGTIN) {
+		this.itemLevelGTIN = itemLevelGTIN;
+	}
+	public String getItemQuantitySize() {
+		return itemQuantitySize;
+	}
+	public void setItemQuantitySize(String itemQuantitySize) {
+		this.itemQuantitySize = itemQuantitySize;
+	}
+	public String getItemQuantitySizeUom() {
+		return itemQuantitySizeUom;
+	}
+	public void setItemQuantitySizeUom(String itemQuantitySizeUom) {
+		this.itemQuantitySizeUom = itemQuantitySizeUom;
+	}
+	public String getMinimumOrderQuantity() {
+		return minimumOrderQuantity;
+	}
+	public void setMinimumOrderQuantity(String minimumOrderQuantity) {
+		this.minimumOrderQuantity = minimumOrderQuantity;
+	}
+	public String getMinimumOrderQuantityUOM() {
+		return minimumOrderQuantityUOM;
+	}
+	public void setMinimumOrderQuantityUOM(String minimumOrderQuantityUOM) {
+		this.minimumOrderQuantityUOM = minimumOrderQuantityUOM;
+	}
+	public String getPartNumber() {
+		return partNumber;
+	}
+	public void setPartNumber(String partNumber) {
+		this.partNumber = partNumber;
+	}
+	public String getPartTerminologyID() {
+		return partTerminologyID;
+	}
+	public void setPartTerminologyID(String partTerminologyID) {
+		this.partTerminologyID = partTerminologyID;
+	}
+	public String getQualifier() {
+		return qualifier;
+	}
+	public void setQualifier(String qualifier) {
+		this.qualifier = qualifier;
+	}
+	public String getQualifierUom() {
+		return qualifierUom;
+	}
+	public void setQualifierUom(String qualifierUom) {
+		this.qualifierUom = qualifierUom;
+	}
+	public String getQualifierValue() {
+		return qualifierValue;
+	}
+	public void setQualifierValue(String qualifierValue) {
+		this.qualifierValue = qualifierValue;
+	}
+	public String getQuantityPerApplication() {
+		return quantityPerApplication;
+	}
+	public void setQuantityPerApplication(String quantityPerApplication) {
+		this.quantityPerApplication = quantityPerApplication;
+	}
+	public String getQuantityPerApplicationQualifier() {
+		return quantityPerApplicationQualifier;
+	}
+	public void setQuantityPerApplicationQualifier(
+			String quantityPerApplicationQualifier) {
+		this.quantityPerApplicationQualifier = quantityPerApplicationQualifier;
+	}
+	public String getQuantityPerApplicationUom() {
+		return quantityPerApplicationUom;
+	}
+	public void setQuantityPerApplicationUom(String quantityPerApplicationUom) {
+		this.quantityPerApplicationUom = quantityPerApplicationUom;
+	}
+	public String getvMRSCode() {
+		return vMRSCode;
+	}
+	public void setvMRSCode(String vMRSCode) {
+		this.vMRSCode = vMRSCode;
+	}
+}
+
+package parsingPies;
+
+public class Items {
+	private long iId;
+	private String aAIAProductCategoryCode;
+	private String acesApplications;
+	private String availableDate;
+	private String baseItemId;
+	private String brandAAIAID;
+	private String brandLabel;
+	private String containerType;
+    private String itemMaintenanceType;
+    private String gtinQualifier;
+    private String hazardousMaterialCode;
+    private String itemEffectiveDate;
+    private String itemLevelGTIN;
+    private String itemQuantitySize;
+    private String itemQuantitySizeUom;
+    private String minimumOrderQuantity;
+    private String minimumOrderQuantityUOM;
+    private String partNumber;
+    private String partTerminologyID;
+    private String qualifier;
+    private String qualifierUom;
+    private String qualifierValue;
+    private String quantityPerApplication;
+    private String quantityPerApplicationQualifier;
+    private String quantityPerApplicationUom;
+    private String vMRSCode;
+	public Items() {
+		super();
+	}
+	public Items(long iId, String aAIAProductCategoryCode,
+			String acesApplications, String availableDate, String baseItemId,
+			String brandAAIAID, String brandLabel, String containerType,
+			String itemMaintenanceType, String gtinQualifier,
+			String hazardousMaterialCode, String itemEffectiveDate,
+			String itemLevelGTIN, String itemQuantitySize,
+			String itemQuantitySizeUom, String minimumOrderQuantity,
+			String minimumOrderQuantityUOM, String partNumber,
+			String partTerminologyID, String qualifier, String qualifierUom,
+			String qualifierValue, String quantityPerApplication,
+			String quantityPerApplicationQualifier,
+			String quantityPerApplicationUom, String vMRSCode) {
+		super();
+		this.iId = iId;
+		this.aAIAProductCategoryCode = aAIAProductCategoryCode;
+		this.acesApplications = acesApplications;
+		this.availableDate = availableDate;
+		this.baseItemId = baseItemId;
+		this.brandAAIAID = brandAAIAID;
+		this.brandLabel = brandLabel;
+		this.containerType = containerType;
+		this.itemMaintenanceType = itemMaintenanceType;
+		this.gtinQualifier = gtinQualifier;
+		this.hazardousMaterialCode = hazardousMaterialCode;
+		this.itemEffectiveDate = itemEffectiveDate;
+		this.itemLevelGTIN = itemLevelGTIN;
+		this.itemQuantitySize = itemQuantitySize;
+		this.itemQuantitySizeUom = itemQuantitySizeUom;
+		this.minimumOrderQuantity = minimumOrderQuantity;
+		this.minimumOrderQuantityUOM = minimumOrderQuantityUOM;
+		this.partNumber = partNumber;
+		this.partTerminologyID = partTerminologyID;
+		this.qualifier = qualifier;
+		this.qualifierUom = qualifierUom;
+		this.qualifierValue = qualifierValue;
+		this.quantityPerApplication = quantityPerApplication;
+		this.quantityPerApplicationQualifier = quantityPerApplicationQualifier;
+		this.quantityPerApplicationUom = quantityPerApplicationUom;
+		this.vMRSCode = vMRSCode;
+	}
+	public long getiId() {
+		return iId;
+	}
+	public void setiId(long iId) {
+		this.iId = iId;
+	}
+	public String getaAIAProductCategoryCode() {
+		return aAIAProductCategoryCode;
+	}
+	public void setaAIAProductCategoryCode(String aAIAProductCategoryCode) {
+		this.aAIAProductCategoryCode = aAIAProductCategoryCode;
+	}
+	public String getAcesApplications() {
+		return acesApplications;
+	}
+	public void setAcesApplications(String acesApplications) {
+		this.acesApplications = acesApplications;
+	}
+	public String getAvailableDate() {
+		return availableDate;
+	}
+	public void setAvailableDate(String availableDate) {
+		this.availableDate = availableDate;
+	}
+	public String getBaseItemId() {
+		return baseItemId;
+	}
+	public void setBaseItemId(String baseItemId) {
+		this.baseItemId = baseItemId;
+	}
+	public String getBrandAAIAID() {
+		return brandAAIAID;
+	}
+	public void setBrandAAIAID(String brandAAIAID) {
+		this.brandAAIAID = brandAAIAID;
+	}
+	public String getBrandLabel() {
+		return brandLabel;
+	}
+	public void setBrandLabel(String brandLabel) {
+		this.brandLabel = brandLabel;
+	}
+	public String getContainerType() {
+		return containerType;
+	}
+	public void setContainerType(String containerType) {
+		this.containerType = containerType;
+	}
+	public String getItemMaintenanceType() {
+		return itemMaintenanceType;
+	}
+	public void setItemMaintenanceType(String itemMaintenanceType) {
+		this.itemMaintenanceType = itemMaintenanceType;
+	}
+	public String getGtinQualifier() {
+		return gtinQualifier;
+	}
+	public void setGtinQualifier(String gtinQualifier) {
+		this.gtinQualifier = gtinQualifier;
+	}
+	public String getHazardousMaterialCode() {
+		return hazardousMaterialCode;
+	}
+	public void setHazardousMaterialCode(String hazardousMaterialCode) {
+		this.hazardousMaterialCode = hazardousMaterialCode;
+	}
+	public String getItemEffectiveDate() {
+		return itemEffectiveDate;
+	}
+	public void setItemEffectiveDate(String itemEffectiveDate) {
+		this.itemEffectiveDate = itemEffectiveDate;
+	}
+	public String getItemLevelGTIN() {
+		return itemLevelGTIN;
+	}
+	public void setItemLevelGTIN(String itemLevelGTIN) {
+		this.itemLevelGTIN = itemLevelGTIN;
+	}
+	public String getItemQuantitySize() {
+		return itemQuantitySize;
+	}
+	public void setItemQuantitySize(String itemQuantitySize) {
+		this.itemQuantitySize = itemQuantitySize;
+	}
+	public String getItemQuantitySizeUom() {
+		return itemQuantitySizeUom;
+	}
+	public void setItemQuantitySizeUom(String itemQuantitySizeUom) {
+		this.itemQuantitySizeUom = itemQuantitySizeUom;
+	}
+	public String getMinimumOrderQuantity() {
+		return minimumOrderQuantity;
+	}
+	public void setMinimumOrderQuantity(String minimumOrderQuantity) {
+		this.minimumOrderQuantity = minimumOrderQuantity;
+	}
+	public String getMinimumOrderQuantityUOM() {
+		return minimumOrderQuantityUOM;
+	}
+	public void setMinimumOrderQuantityUOM(String minimumOrderQuantityUOM) {
+		this.minimumOrderQuantityUOM = minimumOrderQuantityUOM;
+	}
+	public String getPartNumber() {
+		return partNumber;
+	}
+	public void setPartNumber(String partNumber) {
+		this.partNumber = partNumber;
+	}
+	public String getPartTerminologyID() {
+		return partTerminologyID;
+	}
+	public void setPartTerminologyID(String partTerminologyID) {
+		this.partTerminologyID = partTerminologyID;
+	}
+	public String getQualifier() {
+		return qualifier;
+	}
+	public void setQualifier(String qualifier) {
+		this.qualifier = qualifier;
+	}
+	public String getQualifierUom() {
+		return qualifierUom;
+	}
+	public void setQualifierUom(String qualifierUom) {
+		this.qualifierUom = qualifierUom;
+	}
+	public String getQualifierValue() {
+		return qualifierValue;
+	}
+	public void setQualifierValue(String qualifierValue) {
+		this.qualifierValue = qualifierValue;
+	}
+	public String getQuantityPerApplication() {
+		return quantityPerApplication;
+	}
+	public void setQuantityPerApplication(String quantityPerApplication) {
+		this.quantityPerApplication = quantityPerApplication;
+	}
+	public String getQuantityPerApplicationQualifier() {
+		return quantityPerApplicationQualifier;
+	}
+	public void setQuantityPerApplicationQualifier(
+			String quantityPerApplicationQualifier) {
+		this.quantityPerApplicationQualifier = quantityPerApplicationQualifier;
+	}
+	public String getQuantityPerApplicationUom() {
+		return quantityPerApplicationUom;
+	}
+	public void setQuantityPerApplicationUom(String quantityPerApplicationUom) {
+		this.quantityPerApplicationUom = quantityPerApplicationUom;
+	}
+	public String getvMRSCode() {
+		return vMRSCode;
+	}
+	public void setvMRSCode(String vMRSCode) {
+		this.vMRSCode = vMRSCode;
+	}
+}
+
+package parsingPies;
+
+public class ManufacturerProductCodes {
+	private long mId;
+	private String group;
+	private String subGroup;
+	public ManufacturerProductCodes() {
+		super();
+	}
+	public ManufacturerProductCodes(long mId, String group, String subGroup) {
+		super();
+		this.mId = mId;
+		this.group = group;
+		this.subGroup = subGroup;
+	}
+	public long getmId() {
+		return mId;
+	}
+	public void setmId(long mId) {
+		this.mId = mId;
+	}
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
+	}
+	public String getSubGroup() {
+		return subGroup;
+	}
+	public void setSubGroup(String subGroup) {
+		this.subGroup = subGroup;
+	}
+}
+package parsingPies;
+
+public class Packages {
+	private long pkgId;
+	private String innerQuantity;
+    private String innerQuantityUOM;
+    private String orderable;
+    private String packageBarCodeCharacters;
+    private String packageLevelGTIN;
+	private String packageMaintenanceType;
+    private String packageUom;
+    private String quantityofEaches;
+	public Packages() {
+		super();
+	}
+	public Packages(long pkgId, String innerQuantity, String innerQuantityUOM,
+			String orderable, String packageBarCodeCharacters,
+			String packageLevelGTIN, String packageMaintenanceType,
+			String packageUom, String quantityofEaches) {
+		super();
+		this.pkgId = pkgId;
+		this.innerQuantity = innerQuantity;
+		this.innerQuantityUOM = innerQuantityUOM;
+		this.orderable = orderable;
+		this.packageBarCodeCharacters = packageBarCodeCharacters;
+		this.packageLevelGTIN = packageLevelGTIN;
+		this.packageMaintenanceType = packageMaintenanceType;
+		this.packageUom = packageUom;
+		this.quantityofEaches = quantityofEaches;
+	}
+	public long getPkgId() {
+		return pkgId;
+	}
+	public void setPkgId(long pkgId) {
+		this.pkgId = pkgId;
+	}
+	public String getInnerQuantity() {
+		return innerQuantity;
+	}
+	public void setInnerQuantity(String innerQuantity) {
+		this.innerQuantity = innerQuantity;
+	}
+	public String getInnerQuantityUOM() {
+		return innerQuantityUOM;
+	}
+	public void setInnerQuantityUOM(String innerQuantityUOM) {
+		this.innerQuantityUOM = innerQuantityUOM;
+	}
+	public String getOrderable() {
+		return orderable;
+	}
+	public void setOrderable(String orderable) {
+		this.orderable = orderable;
+	}
+	public String getPackageBarCodeCharacters() {
+		return packageBarCodeCharacters;
+	}
+	public void setPackageBarCodeCharacters(String packageBarCodeCharacters) {
+		this.packageBarCodeCharacters = packageBarCodeCharacters;
+	}
+	public String getPackageLevelGTIN() {
+		return packageLevelGTIN;
+	}
+	public void setPackageLevelGTIN(String packageLevelGTIN) {
+		this.packageLevelGTIN = packageLevelGTIN;
+	}
+	public String getPackageMaintenanceType() {
+		return packageMaintenanceType;
+	}
+	public void setPackageMaintenanceType(String packageMaintenanceType) {
+		this.packageMaintenanceType = packageMaintenanceType;
+	}
+	public String getPackageUom() {
+		return packageUom;
+	}
+	public void setPackageUom(String packageUom) {
+		this.packageUom = packageUom;
+	}
+	public String getQuantityofEaches() {
+		return quantityofEaches;
+	}
+	public void setQuantityofEaches(String quantityofEaches) {
+		this.quantityofEaches = quantityofEaches;
+	}
+}
+
+package parsingPies;
+
+public class PartInterchangeInfo {
+	private long prtId;
+	private String partInterchangeMaintenanceType;
+	private String typeCode;
+	private String partBrandAAIAID;
+	private String partNumber;
+	private String qualityGradeLevel;
+	public PartInterchangeInfo() {
+		super();
+	}
+	public PartInterchangeInfo(long prtId,
+			String partInterchangeMaintenanceType, String typeCode,
+			String partBrandAAIAID, String partNumber, String qualityGradeLevel) {
+		super();
+		this.prtId = prtId;
+		this.partInterchangeMaintenanceType = partInterchangeMaintenanceType;
+		this.typeCode = typeCode;
+		this.partBrandAAIAID = partBrandAAIAID;
+		this.partNumber = partNumber;
+		this.qualityGradeLevel = qualityGradeLevel;
+	}
+	public long getPrtId() {
+		return prtId;
+	}
+	public void setPrtId(long prtId) {
+		this.prtId = prtId;
+	}
+	public String getPartInterchangeMaintenanceType() {
+		return partInterchangeMaintenanceType;
+	}
+	public void setPartInterchangeMaintenanceType(
+			String partInterchangeMaintenanceType) {
+		this.partInterchangeMaintenanceType = partInterchangeMaintenanceType;
+	}
+	public String getTypeCode() {
+		return typeCode;
+	}
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
+	}
+	public String getPartBrandAAIAID() {
+		return partBrandAAIAID;
+	}
+	public void setPartBrandAAIAID(String partBrandAAIAID) {
+		this.partBrandAAIAID = partBrandAAIAID;
+	}
+	public String getPartNumber() {
+		return partNumber;
+	}
+	public void setPartNumber(String partNumber) {
+		this.partNumber = partNumber;
+	}
+	public String getQualityGradeLevel() {
+		return qualityGradeLevel;
+	}
+	public void setQualityGradeLevel(String qualityGradeLevel) {
+		this.qualityGradeLevel = qualityGradeLevel;
+	}
+}
+
+package parsingPies;
+
+public class Prices {
+	private long pId;
+	private String price;
+	private String priceCurrencyCode;
+	private String priceEffectiveDate;
+    private String pricingMaintenanceType;
+    private String priceSheetNumber;
+    private String priceType;  
+    private String priceUom;
+	public Prices() {
+		super();
+	}
+	public Prices(long pId, String price, String priceCurrencyCode,
+			String priceEffectiveDate, String pricingMaintenanceType,
+			String priceSheetNumber, String priceType, String priceUom) {
+		super();
+		this.pId = pId;
+		this.price = price;
+		this.priceCurrencyCode = priceCurrencyCode;
+		this.priceEffectiveDate = priceEffectiveDate;
+		this.pricingMaintenanceType = pricingMaintenanceType;
+		this.priceSheetNumber = priceSheetNumber;
+		this.priceType = priceType;
+		this.priceUom = priceUom;
+	}
+	public long getpId() {
+		return pId;
+	}
+	public void setpId(long pId) {
+		this.pId = pId;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getPriceCurrencyCode() {
+		return priceCurrencyCode;
+	}
+	public void setPriceCurrencyCode(String priceCurrencyCode) {
+		this.priceCurrencyCode = priceCurrencyCode;
+	}
+	public String getPriceEffectiveDate() {
+		return priceEffectiveDate;
+	}
+	public void setPriceEffectiveDate(String priceEffectiveDate) {
+		this.priceEffectiveDate = priceEffectiveDate;
+	}
+	public String getPricingMaintenanceType() {
+		return pricingMaintenanceType;
+	}
+	public void setPricingMaintenanceType(String pricingMaintenanceType) {
+		this.pricingMaintenanceType = pricingMaintenanceType;
+	}
+	public String getPriceSheetNumber() {
+		return priceSheetNumber;
+	}
+	public void setPriceSheetNumber(String priceSheetNumber) {
+		this.priceSheetNumber = priceSheetNumber;
+	}
+	public String getPriceType() {
+		return priceType;
+	}
+	public void setPriceType(String priceType) {
+		this.priceType = priceType;
+	}
+	public String getPriceUom() {
+		return priceUom;
+	}
+	public void setPriceUom(String priceUom) {
+		this.priceUom = priceUom;
+	}
+}
+
+package parsingPies;
+
+public class PriceSheets 
+{	
+	private long pSId;
+	private String currencyCode;
+	private String effectiveDate;
+	private String priceSheetMaintenanceType;
+	private String priceSheetName;
+	private String priceSheetNumber;
+	private String supersededPriceSheetNumber;
+	public PriceSheets() {
+		super();
+	}
+	public PriceSheets(long pSId, String currencyCode, String effectiveDate,
+			String priceSheetMaintenanceType, String priceSheetName,
+			String priceSheetNumber, String supersededPriceSheetNumber) {
+		super();
+		this.pSId = pSId;
+		this.setCurrencyCode(currencyCode);
+		this.effectiveDate = effectiveDate;
+		this.priceSheetMaintenanceType = priceSheetMaintenanceType;
+		this.priceSheetName = priceSheetName;
+		this.priceSheetNumber = priceSheetNumber;
+		this.supersededPriceSheetNumber = supersededPriceSheetNumber;
+	}
+	public long getpSId() {
+		return pSId;
+	}
+	public void setpSId(long pSId) {
+		this.pSId = pSId;
+	}
+	
+	public String getEffectiveDate() {
+		return effectiveDate;
+	}
+	public void setEffectiveDate(String effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+	public String getPriceSheetMaintenanceType() {
+		return priceSheetMaintenanceType;
+	}
+	public void setPriceSheetMaintenanceType(String priceSheetMaintenanceType) {
+		this.priceSheetMaintenanceType = priceSheetMaintenanceType;
+	}
+	public String getPriceSheetName() {
+		return priceSheetName;
+	}
+	public void setPriceSheetName(String priceSheetName) {
+		this.priceSheetName = priceSheetName;
+	}
+	public String getPriceSheetNumber() {
+		return priceSheetNumber;
+	}
+	public void setPriceSheetNumber(String priceSheetNumber) {
+		this.priceSheetNumber = priceSheetNumber;
+	}
+	public String getSupersededPriceSheetNumber() {
+		return supersededPriceSheetNumber;
+	}
+	public void setSupersededPriceSheetNumber(String supersededPriceSheetNumber) {
+		this.supersededPriceSheetNumber = supersededPriceSheetNumber;
+	}
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
+}
+package parsingPies;
+
+public class ProductAttributes {
+	private long pAId;
+    private String attributeID;
+    private String maintenanceType;
+    private String pADBAttribute;
+    private String productAttribute;
+	public ProductAttributes() {
+		super();
+	}
+	public ProductAttributes(long pAId, String attributeID,
+			String maintenanceType, String pADBAttribute,
+			String productAttribute) {
+		super();
+		this.pAId = pAId;
+		this.attributeID = attributeID;
+		this.maintenanceType = maintenanceType;
+		this.pADBAttribute = pADBAttribute;
+		this.productAttribute = productAttribute;
+	}
+	public long getpAId() {
+		return pAId;
+	}
+	public void setpAId(long pAId) {
+		this.pAId = pAId;
+	}
+	public String getAttributeID() {
+		return attributeID;
+	}
+	public void setAttributeID(String attributeID) {
+		this.attributeID = attributeID;
+	}
+	public String getMaintenanceType() {
+		return maintenanceType;
+	}
+	public void setMaintenanceType(String maintenanceType) {
+		this.maintenanceType = maintenanceType;
+	}
+	public String getpADBAttribute() {
+		return pADBAttribute;
+	}
+	public void setpADBAttribute(String pADBAttribute) {
+		this.pADBAttribute = pADBAttribute;
+	}
+	public String getProductAttribute() {
+		return productAttribute;
+	}
+	public void setProductAttribute(String productAttribute) {
+		this.productAttribute = productAttribute;
+	}
+}
+
+
+package parsingPies;
+
+public class ProductAttributes {
+	private long pAId;
+    private String attributeID;
+    private String maintenanceType;
+    private String pADBAttribute;
+    private String productAttribute;
+	public ProductAttributes() {
+		super();
+	}
+	public ProductAttributes(long pAId, String attributeID,
+			String maintenanceType, String pADBAttribute,
+			String productAttribute) {
+		super();
+		this.pAId = pAId;
+		this.attributeID = attributeID;
+		this.maintenanceType = maintenanceType;
+		this.pADBAttribute = pADBAttribute;
+		this.productAttribute = productAttribute;
+	}
+	public long getpAId() {
+		return pAId;
+	}
+	public void setpAId(long pAId) {
+		this.pAId = pAId;
+	}
+	public String getAttributeID() {
+		return attributeID;
+	}
+	public void setAttributeID(String attributeID) {
+		this.attributeID = attributeID;
+	}
+	public String getMaintenanceType() {
+		return maintenanceType;
+	}
+	public void setMaintenanceType(String maintenanceType) {
+		this.maintenanceType = maintenanceType;
+	}
+	public String getpADBAttribute() {
+		return pADBAttribute;
+	}
+	public void setpADBAttribute(String pADBAttribute) {
+		this.pADBAttribute = pADBAttribute;
+	}
+	public String getProductAttribute() {
+		return productAttribute;
+	}
+	public void setProductAttribute(String productAttribute) {
+		this.productAttribute = productAttribute;
+	}
+}
+
+
+package parsingPies;
+
+public class ProductAttributes {
+	private long pAId;
+    private String attributeID;
+    private String maintenanceType;
+    private String pADBAttribute;
+    private String productAttribute;
+	public ProductAttributes() {
+		super();
+	}
+	public ProductAttributes(long pAId, String attributeID,
+			String maintenanceType, String pADBAttribute,
+			String productAttribute) {
+		super();
+		this.pAId = pAId;
+		this.attributeID = attributeID;
+		this.maintenanceType = maintenanceType;
+		this.pADBAttribute = pADBAttribute;
+		this.productAttribute = productAttribute;
+	}
+	public long getpAId() {
+		return pAId;
+	}
+	public void setpAId(long pAId) {
+		this.pAId = pAId;
+	}
+	public String getAttributeID() {
+		return attributeID;
+	}
+	public void setAttributeID(String attributeID) {
+		this.attributeID = attributeID;
+	}
+	public String getMaintenanceType() {
+		return maintenanceType;
+	}
+	public void setMaintenanceType(String maintenanceType) {
+		this.maintenanceType = maintenanceType;
+	}
+	public String getpADBAttribute() {
+		return pADBAttribute;
+	}
+	public void setpADBAttribute(String pADBAttribute) {
+		this.pADBAttribute = pADBAttribute;
+	}
+	public String getProductAttribute() {
+		return productAttribute;
+	}
+	public void setProductAttribute(String productAttribute) {
+		this.productAttribute = productAttribute;
+	}
+}
+package parsingPies;
+
+
+public class Trailer{
+	private long tId;
+	private long itemCount;
+	private String transactionDate;
+	public Trailer() {
+		super();
+	}
+	public Trailer(long tId, long itemCount, String transactionDate) {
+		super();
+		this.tId = tId;
+		this.itemCount = itemCount;
+		this.transactionDate = transactionDate;
+	}
+	public long gettId() {
+		return tId;
+	}
+	public void settId(long tId) {
+		this.tId = tId;
+	}
+	public long getItemCount() {
+		return itemCount;
+	}
+	public void setItemCount(long itemCount) {
+		this.itemCount = itemCount;
+	}
+	public String getTransactionDate() {
+		return transactionDate;
+	}
+	public void setTransactionDate(String transactionDate) {
+		this.transactionDate = transactionDate;
+	}
+}
+
+
+package parsingPies;
+
+public class Weights {
+	private long wId;
+	private String weight;
+	private String weightsUom;
+	public Weights() {
+		super();
+	}
+	public Weights(long wId, String weight, String weightsUom) {
+		super();
+		this.wId = wId;
+		this.weight = weight;
+		this.weightsUom = weightsUom;
+	}
+	public long getwId() {
+		return wId;
+	}
+	public void setwId(long wId) {
+		this.wId = wId;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	public String getWeightsUom() {
+		return weightsUom;
+	}
+	public void setWeightsUom(String weightsUom) {
+		this.weightsUom = weightsUom;
+	}
+}
+
+
+
